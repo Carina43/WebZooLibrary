@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebZooLibrary", "WebZooLibrary\WebZooLibrary.csproj", "{BDAA8227-FA21-4B81-A035-63768D2E4293}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebZooWeb", "WebZooWeb\WebZooWeb.csproj", "{05BE7210-50C2-4C86-AFD0-9C3F346D5D41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDAA8227-FA21-4B81-A035-63768D2E4293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDAA8227-FA21-4B81-A035-63768D2E4293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDAA8227-FA21-4B81-A035-63768D2E4293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDAA8227-FA21-4B81-A035-63768D2E4293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05BE7210-50C2-4C86-AFD0-9C3F346D5D41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05BE7210-50C2-4C86-AFD0-9C3F346D5D41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05BE7210-50C2-4C86-AFD0-9C3F346D5D41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05BE7210-50C2-4C86-AFD0-9C3F346D5D41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
