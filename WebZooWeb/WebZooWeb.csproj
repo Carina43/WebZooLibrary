@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\AdminPages\" />
-    <Folder Include="Pages\EventPages\" />
   </ItemGroup>
 
   <ItemGroup>
