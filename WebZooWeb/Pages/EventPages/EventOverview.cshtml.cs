@@ -7,6 +7,11 @@ namespace WebZooWeb.Pages.EventPages
 {
     public class EventOverviewModel : PageModel
     {
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Today { get; set; }
+
+
         private EventService _eventService = new EventService();
 
         [BindProperty]
@@ -20,6 +25,10 @@ namespace WebZooWeb.Pages.EventPages
 
         public void OnGet()
         {
+            var now = DateTime.Now;
+            Year = now.Year;
+            Month = now.Month;
+            Today = now.Day;
         }
     }
 }
