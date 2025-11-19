@@ -1,3 +1,5 @@
+using WebZooLibrary.Service;
+
 namespace WebZooWeb
 {
     public class Program
@@ -6,6 +8,8 @@ namespace WebZooWeb
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Adding EventServices from WebZooLibawy
+            builder.Services.AddSingleton<EventService>();
             // Add services to the container.
             builder.Services.AddRazorPages();
 
