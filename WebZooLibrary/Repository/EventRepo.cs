@@ -27,7 +27,7 @@ namespace WebZooLibrary.Repository
             try
             {
                 connection.Open();
-
+                Debug.WriteLine("CONNECTION OPEN!!");
                 string sqlCode = "SELECT id, name, date, starthour, endhour, maxattendents, currentattendents, description, imgpath FROM Event; ";
 
                 SqlCommand command = new SqlCommand(sqlCode, connection);
@@ -36,7 +36,7 @@ namespace WebZooLibrary.Repository
 
                 while (reader.Read())
                 {
-                    Event e = new Event(reader.GetInt32(0), reader.GetString(1), DateOnly.FromDateTime(reader.GetDateTime(2)), TimeOnly.FromTimeSpan(reader.GetTimeSpan(3)), TimeOnly.FromTimeSpan(reader.GetTimeSpan(4)), reader.GetInt32(5), reader.GetInt32(6), reader.GetString(7), reader.GetString(8));
+                    Event e = new Event(reader.GetInt32(0), reader.GetString(1), DateOnly.FromDateTime(reader.GetDateTime(2)), TimeOnly.FromTimeSpan(reader.GetTimeSpan(3)), TimeOnly.FromTimeSpan(reader.GetTimeSpan(4)), reader.GetInt16(5), reader.GetInt16(6), reader.GetString(7), reader.GetString(8));
                      
                     events.Add(e);
                 }
