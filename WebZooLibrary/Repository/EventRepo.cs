@@ -17,6 +17,7 @@ namespace WebZooLibrary.Repository
         {
            throw new NotImplementedException();
         }
+
         public List<Event> GetAll()
         {
             List<Event> events = new List<Event>();
