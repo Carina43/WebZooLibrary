@@ -1,0 +1,99 @@
+﻿@page 
+@model WebZooWeb.Pages.EventPages.EventCalendarModel
+@{
+}
+<body>
+
+    <h2>@Model.NextMonth/@Model.NextYear</h2>
+
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var daysInNextMonth = DateTime.DaysInMonth(Model.NextYear, Model.NextMonth);
+                var firstDayOfNextMonth = new DateTime(Model.NextYear, Model.NextMonth, 1);
+                var dayOfWeek2 = (int)firstDayOfNextMonth.DayOfWeek;
+                int currentDay2 = 1;
+
+                System.Diagnostics.Debug.WriteLine($"DaysInNextMonth: {daysInNextMonth} ");
+
+                for (int week = 0; currentDay2 <= daysInNextMonth; week++)
+                {
+                    <tr>
+                        @for (int day = 0; day < 7; day++)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Week: {week} Day in loop2: {day} ");
+
+                            if (week == 0 && day < dayOfWeek2 || currentDay2 > daysInNextMonth)
+                            {
+                                <td></td>
+                            }
+                            else
+                            {
+                                var eventToday = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay2 && e.Date.Month == Model.NextMonth);
+                                var cssClass = eventToday != null ? "bg-danger text-white fw-bold" : "";
+                                <td class="@cssClass">@currentDay2</td>
+                                currentDay2++;
+                            }
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+<h2>@Model.Month/@Model.Year</h2>
+
+<table class="table table-bordered text-center">
+    <thead>
+        <tr>
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var daysInMonth = DateTime.DaysInMonth(Model.Year, Model.Month);
+            var firstDayOfMonth = new DateTime(Model.Year, Model.Month, 1);
+            var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
+            int currentDay = 1;
+
+            for (int week = 0; currentDay <= daysInMonth; week++)
+            {
+                <tr>
+                    @for (int day = 0; day < 7; day++)
+                    {
+                        if (week == 0 && day < dayOfWeek || currentDay > daysInMonth)
+                        {
+                            <td></td>
+                        }
+                        else
+                        {
+                            var eventToday = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay && e.Date.Month == Model.Month);
+                            var cssClass = eventToday != null ? "bg-danger text-white fw-bold" : "";
+                            <td class="@cssClass">@currentDay</td>
+                            currentDay++;
+                        }
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+</body>
