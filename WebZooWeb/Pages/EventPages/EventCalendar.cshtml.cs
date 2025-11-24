@@ -22,6 +22,10 @@ namespace WebZooWeb.Pages.EventPages
         {
             _eventService = eventService;
             Events = _eventService.GetAll();
+            foreach (Event e in Events)
+            {
+                Debug.WriteLine($"Events: {e.Name}");
+            }
         }
 
         public void OnGet()
@@ -31,7 +35,7 @@ namespace WebZooWeb.Pages.EventPages
             Month = now.Month;
             Today = now.Day;
             NextYear = Year;
-            NextMonth = Month++;
+            NextMonth = Month + 1;
             if(NextMonth == 13) { NextMonth = 1; NextYear++; }
         }
     }

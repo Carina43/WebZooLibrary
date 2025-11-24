@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "Event Overview";
 }
+<a class="nav-link btn-light" asp-page="/EventPages/EventCalendar"><h4 class="card-title">Kalender-visning</h4></a>
 
 <div class="row row-cols-3">
-    <a class="nav-link card-body" asp-page="/EventPages/EventCalendar"><h4 class="card-title">Kalender-visning</h4></a>
     @foreach (var e in Model.Events)
     {
         <div class="card-body">

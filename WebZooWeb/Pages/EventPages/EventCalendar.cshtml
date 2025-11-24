@@ -4,6 +4,60 @@
 }
 <body>
 
+    <h2>@Model.Month/@Model.Year</h2>
+
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var daysInMonth = DateTime.DaysInMonth(Model.Year, Model.Month);
+                var firstDayOfMonth = new DateTime(Model.Year, Model.Month, 1);
+                var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
+                int currentDay = 1;
+
+                System.Diagnostics.Debug.WriteLine($"DaysInMonth: {daysInMonth} ");
+
+                for (int week = 0; currentDay <= daysInMonth; week++)
+                {
+                    <tr>
+                        @for (int day = 0; day < 7; day++)
+                        {
+                            if (week == 0 && day < dayOfWeek || currentDay > daysInMonth)
+                            {
+                                <td></td>
+                            }
+                            else
+                            {
+                                var eventToday = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay && e.Date.Month == Model.Month);
+                                if (eventToday != null)
+                                {
+                                    System.Diagnostics.Debug.WriteLine($"EventToday!!!");
+                                    <td class="bg-danger text-white fw-bold">@currentDay <br />@eventToday.Name</td>
+                                }
+                                else
+                                {
+                                    <td>@currentDay</td>
+                                }
+                                // var cssClass = eventToday != null ? "bg-danger text-white fw-bold" : "";
+                                currentDay++;
+                            }
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
     <h2>@Model.NextMonth/@Model.NextYear</h2>
 
     <table class="table table-bordered text-center">
@@ -42,7 +96,7 @@
                             {
                                 var eventToday = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay2 && e.Date.Month == Model.NextMonth);
                                 var cssClass = eventToday != null ? "bg-danger text-white fw-bold" : "";
-                                <td class="@cssClass">@currentDay2</td>
+                                <td>@currentDay2</td>
                                 currentDay2++;
                             }
                         }
@@ -51,49 +105,4 @@
             }
         </tbody>
     </table>
-
-<h2>@Model.Month/@Model.Year</h2>
-
-<table class="table table-bordered text-center">
-    <thead>
-        <tr>
-            <th>Sun</th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            var daysInMonth = DateTime.DaysInMonth(Model.Year, Model.Month);
-            var firstDayOfMonth = new DateTime(Model.Year, Model.Month, 1);
-            var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
-            int currentDay = 1;
-
-            for (int week = 0; currentDay <= daysInMonth; week++)
-            {
-                <tr>
-                    @for (int day = 0; day < 7; day++)
-                    {
-                        if (week == 0 && day < dayOfWeek || currentDay > daysInMonth)
-                        {
-                            <td></td>
-                        }
-                        else
-                        {
-                            var eventToday = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay && e.Date.Month == Model.Month);
-                            var cssClass = eventToday != null ? "bg-danger text-white fw-bold" : "";
-                            <td class="@cssClass">@currentDay</td>
-                            currentDay++;
-                        }
-                    }
-                </tr>
-            }
-        }
-    </tbody>
-</table>
-
 </body>
