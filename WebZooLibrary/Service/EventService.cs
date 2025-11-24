@@ -22,5 +22,9 @@ namespace WebZooLibrary.Service
         {
             _eventRepo.Add(new Event(0, name, date, startHour, endHour, maxAttendents, currentAttendents, description, imgPath));
         }
+        public void Edit(Event item)
+        {
+             _eventRepo.Edit(item);
+        }
     }
 }

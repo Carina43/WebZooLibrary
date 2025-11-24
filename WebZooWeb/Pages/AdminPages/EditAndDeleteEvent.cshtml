@@ -1,0 +1,37 @@
+﻿@page
+@model WebZooWeb.Pages.AdminPages.EditAndDeleteEventModel
+@{
+}
+<div class="row row-cols-3">
+    @foreach (var e in Model.Events)
+    {
+        <div class="card-body">
+            <h4 class="card-title">@e.Name</h4>
+            <p class="card-text">
+                Dato: @e.Date<br />Starttidspunkt: @e.StartHour<br />Sluttidspunkt: @e.EndHour<br />
+                Pladsbegrænsing: @e.MaxAttendents<br />Tilmeldte: @e.CurrentAttendents<br />
+                Beskrivelse: @e.Description
+                <a href="EditAndDeleteEvent?id=@e.Id" class="btn btn-primary">Rediger</a>
+            </p>
+        </div>
+    }
+    @* <div class="card shadow-sm">
+        <div class="card-body text-center">
+            <form method="post">
+                <div class="form-group container-fluid">
+                    <input asp-for="Name" id="name" aria-describedby="dateTimeHelp" placeholder="Titel for Event" />
+                    <label for="inputDateTime">Dato: </label>
+                    <input type="date" asp-for="Date" id="Date" aria-describedby="dateTimeHelp" placeholder="Dato For Event">
+                    <label for="inputDateTime">Starttid: </label>
+                    <input type="time" asp-for="StartHour" id="StartTime" aria-describedby="dateTimeHelp" placeholder="Skriv Starttidspunkt" step="3600" />
+                    <input type="time" asp-for="EndHour" id="StartTime" aria-describedby="dateTimeHelp" placeholder="Skriv Sluttidspunkt" step="3600" />
+                    <label for="inputDateTime">Max Tilmeldinger </label>
+                    <input asp-for="MaxAttendents" id="MaxAttendents" placeholder="Max Tilmeldinger" />
+                    <input asp-for="Description" id="Description" placeholder="Om Eventet:" />
+                </div>
+                <button type="submit" class="btn btn-primary mt-5">Submit</button>
+            </form>
+        </div>
+    </div> *@
+</div>
+
