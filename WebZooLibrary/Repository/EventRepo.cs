@@ -52,7 +52,39 @@ namespace WebZooLibrary.Repository
 
             return events;
         }
-        public void Add(Event item) { }
+
+        public void Add(Event item) 
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            try
+            {
+                connection.Open();
+                string sqlCode = "INSERT INTO Events(name, date, starthour, endhour, maxattendents, currentattendents, description, imgpath)" +
+                    "VALUES (@Name, @Date, @StartHour, @EndHour, @MaxAttendents, @CurrentAttendents, @Description, @ImgPath);";
+
+                SqlCommand command = new SqlCommand( sqlCode, connection);
+
+                command.Parameters.AddWithValue("@Name", item.Name);
+                command.Parameters.AddWithValue("@Date", item.Date);
+                command.Parameters.AddWithValue("@StartHour", item.StartHour);
+                command.Parameters.AddWithValue("@EndHour", item.EndHour);
+                command.Parameters.AddWithValue("@MaxAttendents", item.MaxAttendents);
+                command.Parameters.AddWithValue("@CurrentAttendents", item.CurrentAttendents);
+                command.Parameters.AddWithValue("@Description", item.Description);
+                command.Parameters.AddWithValue("@ImgPath", item.ImgPath);
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error:\n{ex}");
+            }
+            finally 
+            { 
+                connection.Close(); 
+            }
+        }
         public void Remove(int id) { }
         public void Edit(Event item) { }
     }

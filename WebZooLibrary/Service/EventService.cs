@@ -17,5 +17,10 @@ namespace WebZooLibrary.Service
         {
             return _eventRepo.GetAll();
         }
+
+        public void Add(int id, string name, DateOnly date, TimeOnly startHour, TimeOnly endHour, int maxAttendents, int currentAttendents, string description, string imgPath)
+        {
+            _eventRepo.Add(new Event(id, name, date, startHour, endHour, maxAttendents, currentAttendents, description, imgPath));
+        }
     }
 }
