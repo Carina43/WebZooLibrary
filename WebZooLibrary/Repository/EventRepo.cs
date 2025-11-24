@@ -60,7 +60,7 @@ namespace WebZooLibrary.Repository
             try
             {
                 connection.Open();
-                string sqlCode = "INSERT INTO Events(name, date, starthour, endhour, maxattendents, currentattendents, description, imgpath)" +
+                string sqlCode = "INSERT INTO Event(name, date, starthour, endhour, maxattendents, currentattendents, description, imgpath)" +
                     "VALUES (@Name, @Date, @StartHour, @EndHour, @MaxAttendents, @CurrentAttendents, @Description, @ImgPath);";
 
                 SqlCommand command = new SqlCommand( sqlCode, connection);

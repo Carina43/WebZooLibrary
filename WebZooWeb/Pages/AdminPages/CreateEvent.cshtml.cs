@@ -17,13 +17,13 @@ namespace WebZooWeb.Pages.AdminPages
         [BindProperty]
         public TimeOnly EndHour { get; set; } = new TimeOnly(20,0,0);
         [BindProperty]
-        public int MaxAttendents { get; set; }
+        public int MaxAttendents { get; set; } = 50;
         [BindProperty]
-        public int CurrentAttendents { get; set; }
+        public int CurrentAttendents { get; set; } = 2;
         [BindProperty]
-        public string Description { get; set; }
+        public string Description { get; set; } = "";
         [BindProperty]
-        public string ImgPath { get; set; }
+        public string ImgPath { get; set; } = "";
 
         public CreateEventModel(EventService eventService)
         {
