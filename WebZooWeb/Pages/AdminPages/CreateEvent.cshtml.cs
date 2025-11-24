@@ -11,7 +11,7 @@ namespace WebZooWeb.Pages.AdminPages
         [BindProperty]
         public string Name { get; set; }
         [BindProperty]
-        public DateOnly Date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+        public DateOnly Date { get; set; } 
         [BindProperty]
         public TimeOnly StartHour { get; set; } = new TimeOnly(14, 0, 0);
         [BindProperty]
@@ -32,7 +32,7 @@ namespace WebZooWeb.Pages.AdminPages
 
         public void OnGet()
         {
-
+            Date = DateOnly.FromDateTime(DateTime.Now);
         }
         public IActionResult OnPost()
         {
