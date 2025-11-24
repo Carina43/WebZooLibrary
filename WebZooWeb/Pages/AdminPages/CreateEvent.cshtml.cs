@@ -37,7 +37,7 @@ namespace WebZooWeb.Pages.AdminPages
         public IActionResult OnPost()
         {
             _eventService.Add(Name, Date, StartHour, EndHour, MaxAttendents, CurrentAttendents, Description, ImgPath);
-            return RedirectToPage ("/CreateEvent");
+            return RedirectToPage ("/AdminPages/CreateEvent");
         }
     }
 }
