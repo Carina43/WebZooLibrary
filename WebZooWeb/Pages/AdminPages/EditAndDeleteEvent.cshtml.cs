@@ -9,7 +9,8 @@ namespace WebZooWeb.Pages.AdminPages
 {
     public class EditAndDeleteEventModel : PageModel
     {
-        public int editID { set; get; }
+        [BindProperty]
+        public int EditID { set; get; }
         [BindProperty]
         public string Name { get; set; }
         [BindProperty]
@@ -37,11 +38,37 @@ namespace WebZooWeb.Pages.AdminPages
             _eventService = eventService;
             Events = _eventService.GetAll();
         }
-        public void OnGet(int Id)
+        //public void OnGet()
+        //{
+        //    //EditID = Id;
+        //    Date = DateOnly.FromDateTime(DateTime.Now);
+        //}
+
+        public void OnGetModal(int id)
         {
-            editID = Id;
-            Date = DateOnly.FromDateTime(DateTime.Now);
+            Debug.WriteLine($"OnGetModal {id}");
+            foreach(Event e in Events)
+            {
+                if(e.Id == id)
+                {
+                    EditID = e.Id;
+                    Name = e.Name;
+                    Date = e.Date;
+                    StartHour = e.StartHour;
+                    EndHour = e.EndHour;
+                    MaxAttendents = e.MaxAttendents;
+                    CurrentAttendents = e.CurrentAttendents;
+                    Description = e.Description;
+                    ImgPath = e.ImgPath;
+                }
+            }
         }
+
+        //public IActionResult OnPostEdit()
+        //{
+
+        //    return RedirectToPage("/EditAndDeleteEvent");
+        //}
 
         public IActionResult OnPost(int editID)
         {

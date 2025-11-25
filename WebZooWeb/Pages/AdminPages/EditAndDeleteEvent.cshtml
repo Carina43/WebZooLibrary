@@ -3,34 +3,54 @@
 @{
 }
 <div class="row row-cols-3">
-@*     @foreach (var e in Model.Events)
+    @foreach (var e in Model.Events)
     {
+        <form method="get" asp-page="Modal">
+            <input type="hidden" value="@e.Id" name="ID" />
+
         <div class="card-body">
             <h4 class="card-title">@e.Name</h4>
             <p class="card-text">
                 Dato: @e.Date<br />Starttidspunkt: @e.StartHour<br />Sluttidspunkt: @e.EndHour<br />
                 Pladsbegrænsing: @e.MaxAttendents<br />Tilmeldte: @e.CurrentAttendents<br />
                 Beskrivelse: @e.Description
-                <a href="EditAndDeleteEvent?id=@e.Id" class="btn btn-primary">Rediger</a>
+                <button class="btn btn-outline-primary EditBTN mt-1" data-bs-toggle="modal" data-bs-target="#editModal">
+                    <i class="bi bi-pencil">Rediger</i>
+                </button>
             </p>
         </div>
-    } *@
-    <div class="card shadow-sm">
-        <div class="card-body text-center">
-            <form method="post">
-                <div class="form-group container-fluid">
-                    <input asp-for="Name" id="name" aria-describedby="dateTimeHelp" placeholder="Titel for Event" />
-                    <label for="inputDateTime">Dato: </label>
-                    <input type="date" asp-for="Date" id="Date" aria-describedby="dateTimeHelp" placeholder="Dato For Event">
-                    <label for="inputDateTime">Starttid: </label>
-                    <input type="time" asp-for="StartHour" id="StartTime" aria-describedby="dateTimeHelp" placeholder="Skriv Starttidspunkt" step="3600" />
-                    <input type="time" asp-for="EndHour" id="StartTime" aria-describedby="dateTimeHelp" placeholder="Skriv Sluttidspunkt" step="3600" />
-                    <label for="inputDateTime">Max Tilmeldinger </label>
-                    <input asp-for="MaxAttendents" id="MaxAttendents" placeholder="Max Tilmeldinger" />
-                    <input asp-for="Description" id="Description" placeholder="Om Eventet:" />
+        </form>
+    }
+
+    
+ 
+
+    <div class="modal fade" id="editModal" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Event</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <button type="submit" class="btn btn-primary mt-5">Submit</button>
-            </form>
+                <form method="post" asp-page-handler="Edit">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center">
+                                <div class="form-group container-fluid">
+                                    <input asp-for="Name" id="name" aria-describedby="dateTimeHelp" placeholder="Titel for Event" />
+                                    <label for="inputDateTime">Dato: </label>
+                                    <input type="date" asp-for="Date" id="Date" aria-describedby="dateTimeHelp" placeholder="Dato For Event">
+                                    <label for="inputDateTime">Starttid: </label>
+                                    <input type="time" asp-for="StartHour" id="StartTime" aria-describedby="dateTimeHelp" placeholder="Skriv Starttidspunkt" step="3600" />
+                                    <input type="time" asp-for="EndHour" id="StartTime" aria-describedby="dateTimeHelp" placeholder="Skriv Sluttidspunkt" step="3600" />
+                                    <label for="inputDateTime">Max Tilmeldinger </label>
+                                    <input asp-for="MaxAttendents" id="MaxAttendents" placeholder="Max Tilmeldinger" />
+                                    <input asp-for="Description" id="Description" placeholder="Om Eventet:" />
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
