@@ -47,7 +47,7 @@ namespace WebZooWeb.Pages.AdminPages
         {
             Debug.WriteLine($"PostEdit: {EditID}");
             _eventService.Edit(new Event(EditID, Name, Date, StartHour, EndHour, MaxAttendents, CurrentAttendents, Description, ImgPath));
-            return Page();
+            return RedirectToPage("/EventPages/EventOverview");
         }
 
         //public IActionResult OnPost(int editID)
