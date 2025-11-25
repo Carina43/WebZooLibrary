@@ -94,7 +94,7 @@ namespace WebZooLibrary.Repository
             {
                 connection.Open();
                 string sqlCode = "UPDATE Event(name, date, starthour, endhour, maxattendents, currentattendents, description, imgpath)" +
-                "VALUES (@Name, @Date, @StartHour, @EndHour, @MaxAttendents, @CurrentAttendents, @Description, @ImgPath) WHERE Id = @Id;";
+                "VALUES (@Name, @Date, @StartHour, @EndHour, @MaxAttendents, @CurrentAttendents, @Description, @ImgPath) WHERE id = @Id;";
 
                 SqlCommand command = new SqlCommand(sqlCode, connection);
 
