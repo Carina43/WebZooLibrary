@@ -40,6 +40,7 @@ namespace WebZooWeb.Pages.AdminPages
         public void OnGet(int Id)
         {
             editID = Id;
+            Date = DateOnly.FromDateTime(DateTime.Now);
         }
 
         public IActionResult OnPost(int editID)
