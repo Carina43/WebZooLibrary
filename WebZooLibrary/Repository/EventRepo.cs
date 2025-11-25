@@ -93,11 +93,11 @@ namespace WebZooLibrary.Repository
             try
             {
                 connection.Open();
-                string sqlCode = "UPDATE Event(name, date, starthour, endhour, maxattendents, currentattendents, description, imgpath)" +
-                "VALUES (@Name, @Date, @StartHour, @EndHour, @MaxAttendents, @CurrentAttendents, @Description, @ImgPath) WHERE id = @Id;";
+                string sqlCode = "UPDATE Event SET name = @Name, date = @Date, startHour = @StartHour, endHour = @EndHour, maxAttendents = @MaxAttendents, currentAttendents = @CurrentAttendents, description = @Description, imgPath = @ImgPath WHERE id = @Id;";
 
                 SqlCommand command = new SqlCommand(sqlCode, connection);
 
+                command.Parameters.AddWithValue("@Id", item.Id);
                 command.Parameters.AddWithValue("@Name", item.Name);
                 command.Parameters.AddWithValue("@Date", item.Date);
                 command.Parameters.AddWithValue("@StartHour", item.StartHour);

@@ -3,55 +3,80 @@
 @{
 }
 <div class="row row-cols-3">
-    @foreach (var e in Model.Events)
-    {
-        <form method="get" asp-page="Modal">
-            <input type="hidden" value="@e.Id" name="ID" />
+	@foreach (var e in Model.Events)
+	{
+		<div class="card-body">
+			<h4 class="card-title">@e.Name</h4>
+			<p class="card-text">
+				Dato: @e.Date<br />Starttidspunkt: @e.StartHour<br />Sluttidspunkt: @e.EndHour<br />
+				Pladsbegrænsing: @e.MaxAttendents<br />Tilmeldte: @e.CurrentAttendents<br />
+				Beskrivelse: @e.Description
+				<button type="button" class="btn btn-primary"
+						data-bs-toggle="modal"
+						data-bs-target="#editModal"
+						data-id="@e.Id"
+						data-name="@e.Name"
+						data-date="@e.Date.ToString("yyyy-MM-dd")"
+						data-startHour="@e.StartHour"
+						data-endHour="@e.EndHour"
+						data-maxAtt="@e.MaxAttendents"
+						data-description="@e.Description"
+						data-imgPath="@e.ImgPath">
+					Edit
+				</button>
 
-        <div class="card-body">
-            <h4 class="card-title">@e.Name</h4>
-            <p class="card-text">
-                Dato: @e.Date<br />Starttidspunkt: @e.StartHour<br />Sluttidspunkt: @e.EndHour<br />
-                Pladsbegrænsing: @e.MaxAttendents<br />Tilmeldte: @e.CurrentAttendents<br />
-                Beskrivelse: @e.Description
-                <button class="btn btn-outline-primary EditBTN mt-1" data-bs-toggle="modal" data-bs-target="#editModal">
-                    <i class="bi bi-pencil">Rediger</i>
-                </button>
-            </p>
-        </div>
-        </form>
-    }
-
-    
- 
-
-    <div class="modal fade" id="editModal" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Event</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="post" asp-page-handler="Edit">
-                    <div class="card shadow-sm">
-                        <div class="card-body text-center">
-                                <div class="form-group container-fluid">
-                                    <input asp-for="Name" id="name" aria-describedby="dateTimeHelp" placeholder="Titel for Event" />
-                                    <label for="inputDateTime">Dato: </label>
-                                    <input type="date" asp-for="Date" id="Date" aria-describedby="dateTimeHelp" placeholder="Dato For Event">
-                                    <label for="inputDateTime">Starttid: </label>
-                                    <input type="time" asp-for="StartHour" id="StartTime" aria-describedby="dateTimeHelp" placeholder="Skriv Starttidspunkt" step="3600" />
-                                    <input type="time" asp-for="EndHour" id="StartTime" aria-describedby="dateTimeHelp" placeholder="Skriv Sluttidspunkt" step="3600" />
-                                    <label for="inputDateTime">Max Tilmeldinger </label>
-                                    <input asp-for="MaxAttendents" id="MaxAttendents" placeholder="Max Tilmeldinger" />
-                                    <input asp-for="Description" id="Description" placeholder="Om Eventet:" />
-                                </div>
-                                <button type="submit" class="btn btn-primary mt-5">Submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+			</p>
+		</div>
+	}
 </div>
 
+
+
+<div class="modal fade" id="editModal" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form method="post" asp-page-handler="Edit">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editModalLabel">Edit Event</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+					<div class="card-body text-center">
+						<div class="form-group container-fluid">
+							<input type="hidden" asp-for="EditID" id="eventId" />
+
+							<input asp-for="Name" id="eventName" aria-describedby="dateTimeHelp" />
+							<label for="eventDate">Dato: </label>
+							<input type="date" asp-for="Date" id="eventDate" aria-describedby="dateTimeHelp">
+							<label for="eventStartHour">Starttid: </label>
+							<input type="time" asp-for="StartHour" id="eventStartHour" aria-describedby="dateTimeHelp" step="3600" />
+							<input type="time" asp-for="EndHour" id="eventEndHour" aria-describedby="dateTimeHelp" step="3600" />
+							<label for="eventMaxAtt">Max Tilmeldinger </label>
+							<input asp-for="MaxAttendents" id="eventMaxAtt" />
+							<input asp-for="Description" id="eventDescription" placeholder="Om Eventet:" />
+						</div>
+						<button type="submit" class="btn btn-primary mt-5">Submit</button>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<!--JavaScript..-->
+@section Scripts {
+	<script>
+		var editModal = document.getElementById('editModal');
+		editModal.addEventListener('show.bs.modal', function (event) {
+			var button = event.relatedTarget;
+			document.getElementById('eventId').value = button.getAttribute('data-id');
+			document.getElementById('eventName').value = button.getAttribute('data-name');
+			document.getElementById('eventDate').value = button.getAttribute('data-date');
+			document.getElementById('eventStartHour').value = button.getAttribute('data-startHour');
+			document.getElementById('eventEndHour').value = button.getAttribute('data-endHour');
+			document.getElementById('eventMaxAtt').value = button.getAttribute('data-maxAtt');
+			document.getElementById('eventDescription').value = button.getAttribute('data-description');
+			document.getElementById('eventImgPath').value = button.getAttribute('data-imgPath');
+		});
+	</script>
+}

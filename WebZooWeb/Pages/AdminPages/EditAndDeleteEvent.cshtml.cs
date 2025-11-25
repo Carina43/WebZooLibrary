@@ -38,42 +38,22 @@ namespace WebZooWeb.Pages.AdminPages
             _eventService = eventService;
             Events = _eventService.GetAll();
         }
-        //public void OnGet()
-        //{
-        //    //EditID = Id;
-        //    Date = DateOnly.FromDateTime(DateTime.Now);
-        //}
-
-        public void OnGetModal(int id)
+        public void OnGet()
         {
-            Debug.WriteLine($"OnGetModal {id}");
-            foreach(Event e in Events)
-            {
-                if(e.Id == id)
-                {
-                    EditID = e.Id;
-                    Name = e.Name;
-                    Date = e.Date;
-                    StartHour = e.StartHour;
-                    EndHour = e.EndHour;
-                    MaxAttendents = e.MaxAttendents;
-                    CurrentAttendents = e.CurrentAttendents;
-                    Description = e.Description;
-                    ImgPath = e.ImgPath;
-                }
-            }
+
         }
 
-        //public IActionResult OnPostEdit()
-        //{
-
-        //    return RedirectToPage("/EditAndDeleteEvent");
-        //}
-
-        public IActionResult OnPost(int editID)
+        public IActionResult OnPostEdit()
         {
-            //_eventService.Edit();
-            return RedirectToPage("/EventPages/EventOverview");
+            Debug.WriteLine($"PostEdit: {EditID}");
+            _eventService.Edit(new Event(EditID, Name, Date, StartHour, EndHour, MaxAttendents, CurrentAttendents, Description, ImgPath));
+            return Page();
         }
+
+        //public IActionResult OnPost(int editID)
+        //{
+        //    _eventService.Edit();
+        //    return RedirectToPage("/EventPages/EventOverview");
+        //}
     }
 }
