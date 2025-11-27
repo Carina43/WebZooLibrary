@@ -50,7 +50,9 @@ namespace WebZooLibrary.Repository
                 connection.Close();
             }
 
-            return events;
+            var sortedEvents = events.OrderBy(e => e.Date);
+
+            return sortedEvents.ToList();
         }
 
         public void Add(Event item) 
