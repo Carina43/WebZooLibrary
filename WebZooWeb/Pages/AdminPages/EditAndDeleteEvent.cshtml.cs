@@ -50,6 +50,12 @@ namespace WebZooWeb.Pages.AdminPages
             return RedirectToPage("/EventPages/EventOverview");
         }
 
+        public IActionResult OnPostRemove()
+        {
+            _eventService.Remove(EditID);
+            return RedirectToPage("/EventPages/EventOverview");
+        }
+
         //public IActionResult OnPost(int editID)
         //{
         //    _eventService.Edit();

@@ -11,6 +11,7 @@
 				Dato: @e.Date<br />Starttidspunkt: @e.StartHour<br />Sluttidspunkt: @e.EndHour<br />
 				Pladsbegrænsing: @e.MaxAttendents<br />Tilmeldte: @e.CurrentAttendents<br />
 				Beskrivelse: @e.Description
+				<br />
 				<button type="button" class="btn btn-primary"
 						data-bs-toggle="modal"
 						data-bs-target="#editModal"
@@ -39,11 +40,10 @@
 				<div class="modal-header">
 					<h5 class="modal-title" id="editModalLabel">Edit Event</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
+					</div>
 					<div class="card-body text-center">
 						<div class="form-group container-fluid">
 							<input type="hidden" asp-for="EditID" id="eventId" />
-
 							<input asp-for="Name" id="eventName" />
 							<label for="eventDate">Dato: </label>
 							<input type="date" asp-for="Date" id="eventDate" aria-describedby="dateTimeHelp">
@@ -54,8 +54,8 @@
 							<input asp-for="MaxAttendents" id="eventMaxAtt" />
 							<input asp-for="Description" id="eventDescription" />
 						</div>
+						<button type="submit" asp-page-handler="Remove" class="btn btn-danger mt-5">Remove</button>
 						<button type="submit" class="btn btn-primary mt-5">Submit</button>
-					</div>
 				</div>
 			</form>
 		</div>

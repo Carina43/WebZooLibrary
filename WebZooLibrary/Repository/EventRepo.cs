@@ -88,7 +88,30 @@ namespace WebZooLibrary.Repository
                 connection.Close(); 
             }
         }
-        public void Remove(int id) { }
+        public void Remove(int id)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            try
+            {
+                connection.Open();
+                string sqlCode = "DELETE FROM Event WHERE id = @Id;";
+
+                SqlCommand command = new SqlCommand(sqlCode, connection);
+
+                command.Parameters.AddWithValue("@Id", id);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error:\n{ex}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         public void Edit(Event item) 
         {
             SqlConnection connection = new SqlConnection(connectionString);

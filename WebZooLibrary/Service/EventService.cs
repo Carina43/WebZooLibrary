@@ -26,5 +26,9 @@ namespace WebZooLibrary.Service
         {
              _eventRepo.Edit(item);
         }
+        public void Remove(int id)
+        {
+            _eventRepo.Remove(id);
+        }
     }
 }

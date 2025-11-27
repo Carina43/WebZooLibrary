@@ -15,9 +15,5 @@ namespace WebZooLibrary.Repository
         public void Add(T item);
         public void Remove(Tkey id);
         public void Edit(T item);
-
-
-
-
     }
 }
