@@ -30,7 +30,5 @@ namespace WebZooLibrary.Model
             Description = description;
             ImgPath = imgpath;
         }
-
-
     }
 }

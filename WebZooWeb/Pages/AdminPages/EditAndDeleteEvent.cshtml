@@ -1,0 +1,81 @@
+﻿@page
+@model WebZooWeb.Pages.AdminPages.EditAndDeleteEventModel
+@{
+}
+<div class="row row-cols-3">
+	@foreach (var e in Model.Events)
+	{
+		<div class="card-body">
+			<h4 class="card-title">@e.Name</h4>
+			<p class="card-text">
+				Dato: @e.Date<br />Starttidspunkt: @e.StartHour<br />Sluttidspunkt: @e.EndHour<br />
+				Pladsbegrænsing: @e.MaxAttendents<br />Tilmeldte: @e.CurrentAttendents<br />
+				Beskrivelse: @e.Description
+				<button type="button" class="btn btn-primary"
+						data-bs-toggle="modal"
+						data-bs-target="#editModal"
+						data-id="@e.Id"
+						data-name="@e.Name"
+						data-date="@e.Date.ToString("yyyy-MM-dd")"
+						data-startHour="@e.StartHour"
+						data-endHour="@e.EndHour"
+						data-maxAtt="@e.MaxAttendents"
+						data-description="@e.Description"
+						data-imgPath="@e.ImgPath">
+					Edit
+				</button>
+
+			</p>
+		</div>
+	}
+</div>
+
+
+
+<div class="modal fade" id="editModal" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form method="post" asp-page-handler="Edit">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editModalLabel">Edit Event</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+					<div class="card-body text-center">
+						<div class="form-group container-fluid">
+							<input type="hidden" asp-for="EditID" id="eventId" />
+
+							<input asp-for="Name" id="eventName" />
+							<label for="eventDate">Dato: </label>
+							<input type="date" asp-for="Date" id="eventDate" aria-describedby="dateTimeHelp">
+							<label for="eventStartHour">Starttid: </label>
+							<input type="time" asp-for="StartHour" id="eventStartHour" aria-describedby="dateTimeHelp" step="3600" />
+							<input type="time" asp-for="EndHour" id="eventEndHour" aria-describedby="dateTimeHelp" step="3600" />
+							<label for="eventMaxAtt">Max Tilmeldinger </label>
+							<input asp-for="MaxAttendents" id="eventMaxAtt" />
+							<input asp-for="Description" id="eventDescription" />
+						</div>
+						<button type="submit" class="btn btn-primary mt-5">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!--JavaScript..-->
+@section Scripts {
+	<script>
+		var editModal = document.getElementById('editModal');
+		editModal.addEventListener('show.bs.modal', function (event) {
+			var button = event.relatedTarget;
+			document.getElementById('eventId').value = button.getAttribute('data-id');
+			document.getElementById('eventName').value = button.getAttribute('data-name');
+			document.getElementById('eventDate').value = button.getAttribute('data-date');
+			document.getElementById('eventStartHour').value = button.getAttribute('data-startHour');
+			document.getElementById('eventEndHour').value = button.getAttribute('data-endHour');
+			document.getElementById('eventMaxAtt').value = button.getAttribute('data-maxAtt');
+			document.getElementById('eventDescription').value = button.getAttribute('data-description');
+			document.getElementById('eventImgPath').value = button.getAttribute('data-imgPath');
+		});
+	</script>
+}
