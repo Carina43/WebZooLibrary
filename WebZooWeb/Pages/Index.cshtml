@@ -1,10 +1,27 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+	ViewData["Title"] = "Home page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Velkommen til Zealand Zoo</h1>
-    <p>Åbent hver fredag fra klokken 14.00 til 20.00.</p>
+	<h1 class="display-4">Velkommen til Zealand Zoo</h1>
+	<div class="row">
+		<div class="col-sm-8">
+			<p>Åbent hver fredag fra klokken 14.00 til 20.00.</p>
+		</div>
+		<div class="col-sm-4">
+			@foreach (var e in Model.Upcoming)
+			{
+				<div class="card-body">
+					<h4 class="card-title">@e.Name</h4>
+					<p class="card-text">
+						Dato: @e.Date<br />Starttidspunkt: @e.StartHour<br />Sluttidspunkt: @e.EndHour<br />
+						Pladsbegrænsing: @e.MaxAttendents<br />Tilmeldte: @e.CurrentAttendents<br />
+						Beskrivelse: @e.Description
+					</p>
+				</div>
+			}
+		</div>
+	</div>
 </div>

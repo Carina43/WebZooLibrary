@@ -50,6 +50,7 @@ namespace WebZooLibrary.Repository
                 connection.Close();
             }
 
+            // LINQ der sorterer events efter Date
             var sortedEvents = events.OrderBy(e => e.Date);
 
             return sortedEvents.ToList();
