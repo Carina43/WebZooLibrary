@@ -21,7 +21,7 @@ namespace WebZooWeb.Pages.AdminPages
         [BindProperty]
         public int CurrentAttendents { get; set; } = 2;
         [BindProperty]
-        public string Description { get; set; } = "";
+        public string Description { get; set; } 
         [BindProperty]
         public string ImgPath { get; set; } = "";
 
@@ -36,6 +36,8 @@ namespace WebZooWeb.Pages.AdminPages
         }
         public IActionResult OnPost()
         {
+            if(Name == null) { Name = "Fredagsbar"; }
+            if(Description == null) { Description = "info kommer senere.."; }
             _eventService.Add(Name, Date, StartHour, EndHour, MaxAttendents, CurrentAttendents, Description, ImgPath);
             return RedirectToPage ("/AdminPages/CreateEvent");
         }
