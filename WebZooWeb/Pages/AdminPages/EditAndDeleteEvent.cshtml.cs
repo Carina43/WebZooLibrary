@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Runtime;
 using WebZooLibrary.Model;
 using WebZooLibrary.Service;
+using WebZooWeb.Helpers;
 
 namespace WebZooWeb.Pages.AdminPages
 {
@@ -38,9 +39,13 @@ namespace WebZooWeb.Pages.AdminPages
             _eventService = eventService;
             Events = _eventService.GetAll();
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            if (!AuthHelper.IsAdmin(HttpContext))
+            {
+                return RedirectToPage("/Login");
+            }
+            return Page();
         }
 
         public IActionResult OnPostEdit()

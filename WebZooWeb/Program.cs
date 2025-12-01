@@ -12,7 +12,9 @@ namespace WebZooWeb
             builder.Services.AddSingleton<EventService>();
             // Add services to the container.
             builder.Services.AddRazorPages();
-
+            // Add Services for sessions
+            builder.Services.AddSession();
+    
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -24,11 +26,14 @@ namespace WebZooWeb
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.MapRazorPages();
 

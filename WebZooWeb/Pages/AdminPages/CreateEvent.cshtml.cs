@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebZooLibrary.Service;
 using WebZooLibrary.Model;
+using WebZooWeb.Helpers;
 
 namespace WebZooWeb.Pages.AdminPages
 {
@@ -30,10 +31,17 @@ namespace WebZooWeb.Pages.AdminPages
             _eventService = eventService;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
             Date = DateOnly.FromDateTime(DateTime.Now);
+            if (!AuthHelper.IsAdmin(HttpContext))
+            {
+                return RedirectToPage("/Login");
+            }
+            return Page();
         }
+
+
         public IActionResult OnPost()
         {
             if(Name == null) { Name = "Fredagsbar"; }
