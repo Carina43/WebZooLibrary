@@ -50,6 +50,11 @@ namespace WebZooWeb.Pages.AdminPages
 
         public IActionResult OnPostEdit()
         {
+            if (Date < DateOnly.FromDateTime(DateTime.Now))
+            {
+                return Page();
+            }
+
             Debug.WriteLine($"PostEdit: {EditID}");
             _eventService.Edit(new Event(EditID, Name, Date, StartHour, EndHour, MaxAttendents, CurrentAttendents, Description, ImgPath));
             return RedirectToPage("/EventPages/EventOverview");
