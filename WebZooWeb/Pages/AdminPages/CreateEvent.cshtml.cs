@@ -44,6 +44,11 @@ namespace WebZooWeb.Pages.AdminPages
 
         public IActionResult OnPost()
         {
+            if (Date < DateOnly.FromDateTime(DateTime.Now))
+            {
+                return Page();
+            }
+
             if(Name == null) { Name = "Fredagsbar"; }
             if(Description == null) { Description = "info kommer senere.."; }
             _eventService.Add(Name, Date, StartHour, EndHour, MaxAttendents, CurrentAttendents, Description, ImgPath);
