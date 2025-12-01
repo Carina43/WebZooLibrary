@@ -35,13 +35,16 @@
 								<a class="nav-link text-dark" asp-area="" asp-page="/AdminPages/EditAndDeleteEvent">Rediger Event</a>
 							</li>
 
+							<ul class="navbar-nav ms-auto">
 							<li class="nav-item">
+								
 								<form method="post" asp-page="/Login" asp-page-handler="Logout">
 									<button type="submit" class="nav-link btn btn-link text-dark" >
 										Log ud!
 									</button>
 								</form>
 							</li>
+							</ul>
 
 
 						}
@@ -49,9 +52,11 @@
 
 						@if (!AuthHelper.IsAdmin(Context))
 						{
+							<ul class="navbar-nav ms-auto">
 							<li class="nav-item">
 								<a class="nav-link text-dark" asp-area="" asp-page="/Login">Log Ind</a>
 							</li>
+							</ul>
 						}
 
 

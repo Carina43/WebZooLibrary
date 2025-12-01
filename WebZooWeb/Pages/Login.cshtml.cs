@@ -11,6 +11,11 @@ namespace WebZooWeb.Pages
         [BindProperty]
         public string Password { get; set; }
 
+
+        public void OnGet()
+        {
+
+        }
         public IActionResult OnPost()
         {
             if (Username == "admin" && Password == "123")
@@ -19,16 +24,16 @@ namespace WebZooWeb.Pages
                 //TempData["Message"] = "Du er logget ind";
                 return RedirectToPage("/Index");
             }
-            if (AuthHelper.IsAdmin(HttpContext))
-            {
-                TempData["Message"] = "Du er allerede logget ind!";
-            }
+            //if (AuthHelper.IsAdmin(HttpContext))
+            //{
+            //    TempData["Message"] = "Du er allerede logget ind!";
+            //}
             else
             {
                 TempData["Message"] = "Ugyldigt log ind!";
             }
 
-            ModelState.AddModelError("", "Invalid Login.");
+            //ModelState.AddModelError("", "Invalid Login.");
             return Page();
 
           
@@ -40,9 +45,6 @@ namespace WebZooWeb.Pages
             return RedirectToPage("/Index");
         }
 
-        public void OnGet()
-        {
-            
-        }
+       
     }
 }
