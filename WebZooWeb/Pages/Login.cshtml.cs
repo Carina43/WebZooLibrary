@@ -37,7 +37,7 @@ namespace WebZooWeb.Pages
         public IActionResult OnPostLogout()
         {
             HttpContext.Session.Clear();
-            return RedirectToPage("/login");
+            return RedirectToPage("/Index");
         }
 
         public void OnGet()
