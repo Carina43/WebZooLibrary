@@ -49,10 +49,11 @@
                                                 data-bs-target="#editModal"
                                                 data-id="@e.Id"
                                                 data-name="@e.Name"
-                                                data-date="@e.Date.ToString("yyyy-MM-dd")"
+                                                data-date="@e.Date.ToString("dd-MM-yyyy")"
                                                 data-startHour="@e.StartHour"
                                                 data-endHour="@e.EndHour"
                                                 data-maxAtt="@e.MaxAttendents"
+                                                data-curAtt="@e.CurrentAttendents"
                                                 data-description="@e.Description"
                                                 data-imgPath="@e.ImgPath">
                                             @e.Name
@@ -124,51 +125,62 @@
     </table>
 </body>
 
-<div class="modal fade" id="editModal" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- Event Info Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form method="post" asp-page-handler="SignUp">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Event Info</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="card-body text-center">
-                    <div class="form-group container-fluid">
-                        <input type="hidden" asp-for="EventID" id="eventId" />
-                        <input type="hidden" asp-for="Name" id="eventName" />
 
-                        <h4>@Model.Name</h4>
-                        <div>@eventDate</div>
-                        <input type="date" asp-for="Date" id="eventDate" aria-describedby="dateTimeHelp">
-                        <label for="eventStartHour">Starttid: </label>
-                        <input type="time" asp-for="StartHour" id="eventStartHour" aria-describedby="dateTimeHelp" step="" />
-                        <input type="time" asp-for="EndHour" id="eventEndHour" aria-describedby="dateTimeHelp" step="" />
-                        <label for="eventMaxAtt">Max Tilmeldinger </label>
-                        <input asp-for="MaxAttendents" id="eventMaxAtt" />
-                        <input asp-for="Description" id="eventDescription" />
-                    </div>
-                    <button type="submit" asp-page-handler="Remove" class="btn btn-danger mt-5">Remove</button>
-                    <button type="submit" class="btn btn-primary mt-5">Submit</button>
-                </div>
-            </form>
+            <div class="modal-header">
+                <h5 class="modal-title">Event Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <h3 id="eventName"></h3>
+
+                <p><strong>Dato:</strong> <span id="eventDate"></span></p>
+                <p>
+                    <strong>Tid:</strong>
+                    <span id="eventStartHour"></span> -
+                    <span id="eventEndHour"></span>
+                </p>
+                <p><strong>Tilmeldte: </strong> <span id="eventCurAtt"></span></p>
+                <p><strong>Max Tilmeldelser:</strong> <span id="eventMaxAtt"></span></p>
+
+                <div id="eventDescription" class="border rounded p-2"></div>
+
+                @* <hr />
+
+                <div class="text-center">
+                    <img id="eventimg" class="img-fluid rounded shadow" />
+                </div> *@
+
+            </div>
+
+           
+
         </div>
     </div>
 </div>
 
-<!--JavaScript..-->
+
 @section Scripts {
     <script>
-        var editModal = document.getElementById('editModal');
-        editModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget;
-            document.getElementById('eventId').value = button.getAttribute('data-id');
-            document.getElementById('eventName').value = button.getAttribute('data-name');
-            document.getElementById('eventDate').value = button.getAttribute('data-date');
-            document.getElementById('eventStartHour').value = button.getAttribute('data-startHour');
-            document.getElementById('eventEndHour').value = button.getAttribute('data-endHour');
-            document.getElementById('eventMaxAtt').value = button.getAttribute('data-maxAtt');
-            document.getElementById('eventDescription').value = button.getAttribute('data-description');
-            document.getElementById('eventImgPath').value = button.getAttribute('data-imgPath');
+        const editModal = document.getElementById('editModal');
+
+        editModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget;
+
+            document.getElementById('eventName').textContent = button.getAttribute('data-name');
+            document.getElementById('eventDate').textContent = button.getAttribute('data-date');
+            document.getElementById('eventStartHour').textContent = button.getAttribute('data-startHour');
+            document.getElementById('eventEndHour').textContent = button.getAttribute('data-endHour');
+            document.getElementById('eventMaxAtt').textContent = button.getAttribute('data-maxAtt');
+            document.getElementById('eventCurAtt').textContent = button.getAttribute('data-curAtt');
+            document.getElementById('eventDescription').textContent = button.getAttribute('data-description');
+
+            document.getElementById('eventImg').src = button.getAttribute('data-imgPath');
         });
     </script>
 }
