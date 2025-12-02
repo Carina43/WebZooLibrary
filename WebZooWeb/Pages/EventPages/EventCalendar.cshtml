@@ -112,9 +112,33 @@
 							}
 							else
 							{
-								var eventToday = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay2 && e.Date.Month == Model.NextMonth);
-								var cssClass = eventToday != null ? "bg-danger text-white fw-bold" : "";
-								<td>@currentDay2</td>
+								var e = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay2 && e.Date.Month == Model.NextMonth);
+								if (e != null)
+								{
+									System.Diagnostics.Debug.WriteLine($"EventToday!!!");
+									<td class="bg-danger text-white fw-bold">
+										@currentDay2 <br />
+										<button type="button" class="btn"
+												data-bs-toggle="modal"
+												data-bs-target="#editModal"
+												data-id="@e.Id"
+												data-name="@e.Name"
+												data-date="@e.Date.ToString("dd-MM-yyyy")"
+												data-startHour="@e.StartHour"
+												data-endHour="@e.EndHour"
+												data-maxAtt="@e.MaxAttendents"
+												data-curAtt="@e.CurrentAttendents"
+												data-description="@e.Description"
+												data-imgPath="@e.ImgPath">
+											@e.Name
+										</button>
+									</td>
+
+								}
+								else
+								{
+									<td>@currentDay2</td>
+								}
 								currentDay2++;
 							}
 						}
