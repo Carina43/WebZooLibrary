@@ -17,6 +17,22 @@ namespace WebZooWeb.Pages.EventPages
         public int Today { get; set; }
         public int NextMonth { get; set; }
         public int NextYear { get; set; }
+        [BindProperty]
+        public int EventID { set; get; }
+        [BindProperty]
+        public string Name { get; set; }
+        [BindProperty]
+        public DateOnly Date { get; set; }
+        [BindProperty]
+        public TimeOnly StartHour { get; set; } = new TimeOnly(14, 0, 0);
+        [BindProperty]
+        public TimeOnly EndHour { get; set; } = new TimeOnly(20, 0, 0);
+        [BindProperty]
+        public int MaxAttendents { get; set; } = 50;
+        [BindProperty]
+        public int CurrentAttendents { get; set; } = 2;
+        [BindProperty]
+        public string Description { get; set; } = "";
 
         public EventCalendarModel(EventService eventService)
         {

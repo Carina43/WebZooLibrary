@@ -38,11 +38,27 @@
                             }
                             else
                             {
-                                var eventToday = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay && e.Date.Month == Model.Month);
-                                if (eventToday != null)
+                                var e = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay && e.Date.Month == Model.Month);
+                                if (e != null)
                                 {
                                     System.Diagnostics.Debug.WriteLine($"EventToday!!!");
-                                    <td class="bg-danger text-white fw-bold">@currentDay <br />@eventToday.Name</td>
+                                    <td 
+                                        class="bg-danger text-white fw-bold">@currentDay <br/>
+                                        <button type="button" class="btn"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editModal"
+                                                data-id="@e.Id"
+                                                data-name="@e.Name"
+                                                data-date="@e.Date.ToString("yyyy-MM-dd")"
+                                                data-startHour="@e.StartHour"
+                                                data-endHour="@e.EndHour"
+                                                data-maxAtt="@e.MaxAttendents"
+                                                data-description="@e.Description"
+                                                data-imgPath="@e.ImgPath">
+                                            @e.Name
+                                        </button>
+                                    </td>
+                                    
                                 }
                                 else
                                 {
@@ -57,6 +73,7 @@
             }
         </tbody>
     </table>
+
 
     <h2>@Model.NextMonth/@Model.NextYear</h2>
 
@@ -106,3 +123,52 @@
         </tbody>
     </table>
 </body>
+
+<div class="modal fade" id="editModal" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" asp-page-handler="SignUp">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Event Info</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="card-body text-center">
+                    <div class="form-group container-fluid">
+                        <input type="hidden" asp-for="EventID" id="eventId" />
+                        <input type="hidden" asp-for="Name" id="eventName" />
+
+                        <h4>@Model.Name</h4>
+                        <div>@eventDate</div>
+                        <input type="date" asp-for="Date" id="eventDate" aria-describedby="dateTimeHelp">
+                        <label for="eventStartHour">Starttid: </label>
+                        <input type="time" asp-for="StartHour" id="eventStartHour" aria-describedby="dateTimeHelp" step="" />
+                        <input type="time" asp-for="EndHour" id="eventEndHour" aria-describedby="dateTimeHelp" step="" />
+                        <label for="eventMaxAtt">Max Tilmeldinger </label>
+                        <input asp-for="MaxAttendents" id="eventMaxAtt" />
+                        <input asp-for="Description" id="eventDescription" />
+                    </div>
+                    <button type="submit" asp-page-handler="Remove" class="btn btn-danger mt-5">Remove</button>
+                    <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--JavaScript..-->
+@section Scripts {
+    <script>
+        var editModal = document.getElementById('editModal');
+        editModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            document.getElementById('eventId').value = button.getAttribute('data-id');
+            document.getElementById('eventName').value = button.getAttribute('data-name');
+            document.getElementById('eventDate').value = button.getAttribute('data-date');
+            document.getElementById('eventStartHour').value = button.getAttribute('data-startHour');
+            document.getElementById('eventEndHour').value = button.getAttribute('data-endHour');
+            document.getElementById('eventMaxAtt').value = button.getAttribute('data-maxAtt');
+            document.getElementById('eventDescription').value = button.getAttribute('data-description');
+            document.getElementById('eventImgPath').value = button.getAttribute('data-imgPath');
+        });
+    </script>
+}
