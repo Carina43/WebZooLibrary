@@ -1,186 +1,194 @@
-﻿@page 
+﻿@page
 @model WebZooWeb.Pages.EventPages.EventCalendarModel
 @{
 }
 <body>
-    <a class="nav-link btn-light" asp-page="/EventPages/EventOverview"><h4 class="card-title">Liste-visning</h4></a>
-    <h2>@Model.Month/@Model.Year</h2>
+	<a class="nav-link btn-light" asp-page="/EventPages/EventOverview"><h4 class="card-title">Liste-visning</h4></a>
+	<h2>@Model.Month/@Model.Year</h2>
 
-    <table class="table table-bordered text-center">
-        <thead>
-            <tr>
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                var daysInMonth = DateTime.DaysInMonth(Model.Year, Model.Month);
-                var firstDayOfMonth = new DateTime(Model.Year, Model.Month, 1);
-                var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
-                int currentDay = 1;
+	<table class="table table-bordered text-center">
+		<thead>
+			<tr>
+				<th>Sun</th>
+				<th>Mon</th>
+				<th>Tue</th>
+				<th>Wed</th>
+				<th>Thu</th>
+				<th>Fri</th>
+				<th>Sat</th>
+			</tr>
+		</thead>
+		<tbody>
+			@{
+				var daysInMonth = DateTime.DaysInMonth(Model.Year, Model.Month);
+				var firstDayOfMonth = new DateTime(Model.Year, Model.Month, 1);
+				var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
+				int currentDay = 1;
 
-                System.Diagnostics.Debug.WriteLine($"DaysInMonth: {daysInMonth} ");
+				System.Diagnostics.Debug.WriteLine($"DaysInMonth: {daysInMonth} ");
 
-                for (int week = 0; currentDay <= daysInMonth; week++)
-                {
-                    <tr>
-                        @for (int day = 0; day < 7; day++)
-                        {
-                            if (week == 0 && day < dayOfWeek || currentDay > daysInMonth)
-                            {
-                                <td></td>
-                            }
-                            else
-                            {
-                                var e = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay && e.Date.Month == Model.Month);
-                                if (e != null)
-                                {
-                                    System.Diagnostics.Debug.WriteLine($"EventToday!!!");
-                                    <td 
-                                        class="bg-danger text-white fw-bold">@currentDay <br/>
-                                        <button type="button" class="btn"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#editModal"
-                                                data-id="@e.Id"
-                                                data-name="@e.Name"
-                                                data-date="@e.Date.ToString("dd-MM-yyyy")"
-                                                data-startHour="@e.StartHour"
-                                                data-endHour="@e.EndHour"
-                                                data-maxAtt="@e.MaxAttendents"
-                                                data-curAtt="@e.CurrentAttendents"
-                                                data-description="@e.Description"
-                                                data-imgPath="@e.ImgPath">
-                                            @e.Name
-                                        </button>
-                                    </td>
-                                    
-                                }
-                                else
-                                {
-                                    <td>@currentDay</td>
-                                }
-                                // var cssClass = eventToday != null ? "bg-danger text-white fw-bold" : "";
-                                currentDay++;
-                            }
-                        }
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
+				for (int week = 0; currentDay <= daysInMonth; week++)
+				{
+					<tr>
+						@for (int day = 0; day < 7; day++)
+						{
+							if (week == 0 && day < dayOfWeek || currentDay > daysInMonth)
+							{
+								<td></td>
+							}
+							else
+							{
+								var e = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay && e.Date.Month == Model.Month);
+								if (e != null)
+								{
+									System.Diagnostics.Debug.WriteLine($"EventToday!!!");
+									<td class="bg-danger text-white fw-bold">
+										@currentDay <br />
+										<button type="button" class="btn"
+												data-bs-toggle="modal"
+												data-bs-target="#editModal"
+												data-id="@e.Id"
+												data-name="@e.Name"
+												data-date="@e.Date.ToString("dd-MM-yyyy")"
+												data-startHour="@e.StartHour"
+												data-endHour="@e.EndHour"
+												data-maxAtt="@e.MaxAttendents"
+												data-curAtt="@e.CurrentAttendents"
+												data-description="@e.Description"
+												data-imgPath="@e.ImgPath">
+												@e.Name
+										</button>
+									</td>
+
+								}
+								else
+								{
+									<td>@currentDay</td>
+								}
+								// var cssClass = eventToday != null ? "bg-danger text-white fw-bold" : "";
+								currentDay++;
+							}
+						}
+					</tr>
+				}
+			}
+		</tbody>
+	</table>
 
 
-    <h2>@Model.NextMonth/@Model.NextYear</h2>
+	<h2>@Model.NextMonth/@Model.NextYear</h2>
 
-    <table class="table table-bordered text-center">
-        <thead>
-            <tr>
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                var daysInNextMonth = DateTime.DaysInMonth(Model.NextYear, Model.NextMonth);
-                var firstDayOfNextMonth = new DateTime(Model.NextYear, Model.NextMonth, 1);
-                var dayOfWeek2 = (int)firstDayOfNextMonth.DayOfWeek;
-                int currentDay2 = 1;
+	<table class="table table-bordered text-center">
+		<thead>
+			<tr>
+				<th>Sun</th>
+				<th>Mon</th>
+				<th>Tue</th>
+				<th>Wed</th>
+				<th>Thu</th>
+				<th>Fri</th>
+				<th>Sat</th>
+			</tr>
+		</thead>
+		<tbody>
+			@{
+				var daysInNextMonth = DateTime.DaysInMonth(Model.NextYear, Model.NextMonth);
+				var firstDayOfNextMonth = new DateTime(Model.NextYear, Model.NextMonth, 1);
+				var dayOfWeek2 = (int)firstDayOfNextMonth.DayOfWeek;
+				int currentDay2 = 1;
 
-                System.Diagnostics.Debug.WriteLine($"DaysInNextMonth: {daysInNextMonth} ");
+				System.Diagnostics.Debug.WriteLine($"DaysInNextMonth: {daysInNextMonth} ");
 
-                for (int week = 0; currentDay2 <= daysInNextMonth; week++)
-                {
-                    <tr>
-                        @for (int day = 0; day < 7; day++)
-                        {
-                            System.Diagnostics.Debug.WriteLine($"Week: {week} Day in loop2: {day} ");
+				for (int week = 0; currentDay2 <= daysInNextMonth; week++)
+				{
+					<tr>
+						@for (int day = 0; day < 7; day++)
+						{
+							System.Diagnostics.Debug.WriteLine($"Week: {week} Day in loop2: {day} ");
 
-                            if (week == 0 && day < dayOfWeek2 || currentDay2 > daysInNextMonth)
-                            {
-                                <td></td>
-                            }
-                            else
-                            {
-                                var eventToday = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay2 && e.Date.Month == Model.NextMonth);
-                                var cssClass = eventToday != null ? "bg-danger text-white fw-bold" : "";
-                                <td>@currentDay2</td>
-                                currentDay2++;
-                            }
-                        }
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
+							if (week == 0 && day < dayOfWeek2 || currentDay2 > daysInNextMonth)
+							{
+								<td></td>
+							}
+							else
+							{
+								var eventToday = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay2 && e.Date.Month == Model.NextMonth);
+								var cssClass = eventToday != null ? "bg-danger text-white fw-bold" : "";
+								<td>@currentDay2</td>
+								currentDay2++;
+							}
+						}
+					</tr>
+				}
+			}
+		</tbody>
+	</table>
 </body>
 
 <!-- Event Info Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
 
-            <div class="modal-header">
-                <h5 class="modal-title">Event Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
+			<div class="modal-header">
+				<h5 class="modal-title">Event Details</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
 
-            <div class="modal-body">
+			<div class="modal-body">
 
-                <h3 id="eventName"></h3>
+				<h3 id="eventName"></h3>
 
-                <p><strong>Dato:</strong> <span id="eventDate"></span></p>
-                <p>
-                    <strong>Tid:</strong>
-                    <span id="eventStartHour"></span> -
-                    <span id="eventEndHour"></span>
-                </p>
-                <p><strong>Tilmeldte: </strong> <span id="eventCurAtt"></span></p>
-                <p><strong>Max Tilmeldelser:</strong> <span id="eventMaxAtt"></span></p>
+				<p><strong>Dato:</strong> <span id="eventDate"></span></p>
+				<p>
+					<strong>Tid:</strong>
+					<span id="eventStartHour"></span> -
+					<span id="eventEndHour"></span>
+				</p>
+				<p><strong>Tilmeldte: </strong> <span id="eventCurAtt"></span></p>
+				<p><strong>Max Tilmeldelser:</strong> <span id="eventMaxAtt"></span></p>
 
-                <div id="eventDescription" class="border rounded p-2"></div>
+				<div id="eventDescription" class="border-top rounded p-2"></div>
 
-                @* <hr />
+				@* <hr />
 
                 <div class="text-center">
-                    <img id="eventimg" class="img-fluid rounded shadow" />
+                    <img id="eventImg" class="img-fluid rounded shadow" />
                 </div> *@
 
-            </div>
+				<form method="post" asp-page-handler="SignUp">
+					<input type="hidden" name="EventID" id="eventId" />
+					<button type="submit">Tilmeld dig dette event</button>
+				</form>
 
-           
+			</div>
 
-        </div>
-    </div>
+
+
+		</div>
+	</div>
 </div>
 
 
 @section Scripts {
-    <script>
-        const editModal = document.getElementById('editModal');
+	<script>
+		const editModal = document.getElementById('editModal');
 
-        editModal.addEventListener('show.bs.modal', event => {
-            const button = event.relatedTarget;
+		editModal.addEventListener('show.bs.modal', event => {
+			const button = event.relatedTarget;
 
-            document.getElementById('eventName').textContent = button.getAttribute('data-name');
-            document.getElementById('eventDate').textContent = button.getAttribute('data-date');
-            document.getElementById('eventStartHour').textContent = button.getAttribute('data-startHour');
-            document.getElementById('eventEndHour').textContent = button.getAttribute('data-endHour');
-            document.getElementById('eventMaxAtt').textContent = button.getAttribute('data-maxAtt');
-            document.getElementById('eventCurAtt').textContent = button.getAttribute('data-curAtt');
-            document.getElementById('eventDescription').textContent = button.getAttribute('data-description');
+			document.getElementById('eventName').textContent = button.getAttribute('data-name');
+			document.getElementById('eventDate').textContent = button.getAttribute('data-date');
+			document.getElementById('eventStartHour').textContent = button.getAttribute('data-startHour');
+			document.getElementById('eventEndHour').textContent = button.getAttribute('data-endHour');
+			document.getElementById('eventMaxAtt').textContent = button.getAttribute('data-maxAtt');
+			document.getElementById('eventCurAtt').textContent = button.getAttribute('data-curAtt');
+			document.getElementById('eventDescription').textContent = button.getAttribute('data-description');
 
-            document.getElementById('eventImg').src = button.getAttribute('data-imgPath');
-        });
-    </script>
+			// document.getElementById('eventImg').src = button.getAttribute('data-imgPath');
+
+			document.getElementById('eventId').value = button.getAttribute('data-id');
+
+		});
+	</script>
 }

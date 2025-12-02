@@ -12,6 +12,10 @@ namespace WebZooLibrary.Service
     {
         private ICollectionRepo<Event, int> _eventRepo = new EventRepo();
 
+        public Event Get(int id)
+        {
+            return _eventRepo.Get(id);
+        }
 
         public List<Event> GetAll()
         {

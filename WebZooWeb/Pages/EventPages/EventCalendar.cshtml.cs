@@ -54,5 +54,15 @@ namespace WebZooWeb.Pages.EventPages
             NextMonth = Month + 1;
             if(NextMonth == 13) { NextMonth = 1; NextYear++; }
         }
+
+        public IActionResult OnPostSignUp()
+        {   
+            Debug.WriteLine($"EVentID: {EventID}"); 
+            Event ev = _eventService.Get(EventID);
+            ev.CurrentAttendents++;
+            _eventService.Edit(ev);
+
+            return RedirectToPage("/EventPages/EventCalendar");
+        }
     }
 }
