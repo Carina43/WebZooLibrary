@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
@@ -15,8 +16,35 @@ namespace WebZooLibrary.Repository
 
         public Event Get(int id)
         {
-           throw new NotImplementedException();
+            SqlConnection connection = new SqlConnection(connectionString);
+            Event e = null;
+            try
+            {
+                connection.Open();
+                string sqlCode = "SELECT id, name, date, starthour, endhour, maxattendents, currentattendents, description, imgpath FROM Event WHERE id = @Id ; ";
+                SqlCommand command = new SqlCommand(sqlCode, connection);
+
+                command.Parameters.AddWithValue("@Id", id);
+
+                command.ExecuteNonQuery();
+
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                e = new Event(reader.GetInt32(0), reader.GetString(1), DateOnly.FromDateTime(reader.GetDateTime(2)), TimeOnly.FromTimeSpan(reader.GetTimeSpan(3)), TimeOnly.FromTimeSpan(reader.GetTimeSpan(4)), reader.GetInt16(5), reader.GetInt16(6), reader.GetString(7), reader.GetString(8));
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error:\n{ex}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return e;
         }
+
 
         public List<Event> GetAll()
         {

@@ -56,5 +56,15 @@ namespace WebZooWeb.Pages.EventPages
 
 
         }
+
+        public IActionResult OnPostSignUp()
+        {   
+            Debug.WriteLine($"EVentID: {EventID}"); 
+            Event ev = _eventService.Get(EventID);
+            ev.CurrentAttendents++;
+            _eventService.Edit(ev);
+
+            return RedirectToPage("/EventPages/EventCalendar");
+        }
     }
 }
