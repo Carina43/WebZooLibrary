@@ -10,7 +10,7 @@ namespace WebZooWeb.Pages.EventPages
         private EventService _eventService = new EventService();
 
         [BindProperty]
-        public List<Event> Events { get; set; }
+        public List<Event> Events { get; set; } = new List<Event>();
         public int Year { get; set; }
         public int Month { get; set; }
         public int Today { get; set; }
@@ -18,7 +18,7 @@ namespace WebZooWeb.Pages.EventPages
         public EventOverviewModel(EventService eventService)
         {
             _eventService = eventService;
-            Events = _eventService.GetAll();
+            //Events = _eventService.GetAll();
            
         }
 
@@ -29,13 +29,13 @@ namespace WebZooWeb.Pages.EventPages
             Month = now.Month;
             Today = now.Day;
 
-            List<Event> tempt = Events;
+            List<Event> tempt = _eventService.GetAll();
 
             foreach (Event e in tempt)
             {
-                if (e.Date < now)
+                if (e.Date >= now)
                 {
-                    Events.Remove(e);
+                    Events.Add(e);
                 }
             }
         }

@@ -12,7 +12,7 @@ namespace WebZooWeb.Pages.EventPages
         private readonly EventService _eventService = new EventService();
 
         [BindProperty]
-        public List<Event> Events { get; set; }
+        public List<Event> Events { get; set; } = new List<Event>();
         public int Year { get; set; }
         public int Month { get; set; }
         public int Today { get; set; }
@@ -38,7 +38,7 @@ namespace WebZooWeb.Pages.EventPages
         public EventCalendarModel(EventService eventService)
         {
             _eventService = eventService;
-            Events = _eventService.GetAll();
+            //Events = _eventService.GetAll();
             foreach (Event e in Events)
             {
                 Debug.WriteLine($"Events: {e.Name}");
@@ -47,7 +47,7 @@ namespace WebZooWeb.Pages.EventPages
 
         public void OnGet()
         {
-            var now = DateTime.Now;
+            var now = DateOnly.FromDateTime(DateTime.Now);
             Year = now.Year;
             Month = now.Month;
             Today = now.Day;
@@ -55,7 +55,15 @@ namespace WebZooWeb.Pages.EventPages
             NextMonth = Month + 1;
             if (NextMonth == 13) { NextMonth = 1; NextYear++; }
 
+            List<Event> tempt = _eventService.GetAll();
 
+            foreach (Event e in tempt)
+            {
+                if (e.Date >= now)
+                {
+                    Events.Add(e);
+                }
+            }
         }
 
         public IActionResult OnPostSignUp()
