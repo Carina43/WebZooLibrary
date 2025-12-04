@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebZooLibrary.Service;
 using WebZooLibrary.Model;
 using System.Diagnostics;
+using WebZooWeb.Helpers;
 
 namespace WebZooWeb.Pages.EventPages
 {
@@ -52,19 +53,37 @@ namespace WebZooWeb.Pages.EventPages
             Today = now.Day;
             NextYear = Year;
             NextMonth = Month + 1;
-            if(NextMonth == 13) { NextMonth = 1; NextYear++; }
+            if (NextMonth == 13) { NextMonth = 1; NextYear++; }
 
 
         }
 
         public IActionResult OnPostSignUp()
-        {   
-            Debug.WriteLine($"EVentID: {EventID}"); 
-            Event ev = _eventService.Get(EventID);
-            ev.CurrentAttendents++;
-            _eventService.Edit(ev);
+        {
+            if (AuthHelper.IsUser(HttpContext))
+            {
+                Event ev = _eventService.Get(EventID);
+
+                if (ev.CurrentAttendents < ev.MaxAttendents)
+                {
+                    ev.CurrentAttendents++;
+                    _eventService.Edit(ev);
+                }
+                //for (int i = ev.CurrentAttendents; i < (ev.MaxAttendents); i++)
+                //{
+                //    ev.CurrentAttendents++;
+                //    _eventService.Edit(ev);
+                //}
+                //Debug.WriteLine($"EVentID: {EventID}");
+
+              
+
+            }
 
             return RedirectToPage("/EventPages/EventCalendar");
+
+
+
         }
     }
 }

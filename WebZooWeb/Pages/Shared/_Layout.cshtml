@@ -48,9 +48,24 @@
 
 
 						}
+						@if (AuthHelper.IsUser(Context))
+						{
+							<ul class="navbar-nav ms-auto">
+								<li class="nav-item">
+
+									<form method="post" asp-page="/Login" asp-page-handler="Logout">
+										<button type="submit" class="nav-link btn btn-link text-dark">
+											Log ud!
+										</button>
+									</form>
+								</li>
+							</ul>
 
 
-						@if (!AuthHelper.IsAdmin(Context))
+						}
+
+
+						@if (!AuthHelper.IsAdmin(Context) && !AuthHelper.IsUser(Context))
 						{
 							<ul class="navbar-nav ms-auto">
 							<li class="nav-item">
@@ -58,6 +73,7 @@
 							</li>
 							</ul>
 						}
+						
 
 
 					</ul>

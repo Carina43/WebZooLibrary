@@ -6,5 +6,8 @@ namespace WebZooWeb.Helpers
     {
         public static bool IsAdmin(HttpContext ctx)
             => ctx.Session.GetString("UserRole") == "Admin";
+
+        public static bool IsUser(HttpContext ctx)
+            => ctx.Session.GetString("UserRole") == "User";
     }
 }

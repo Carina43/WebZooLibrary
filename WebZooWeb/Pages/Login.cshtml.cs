@@ -24,6 +24,12 @@ namespace WebZooWeb.Pages
                 //TempData["Message"] = "Du er logget ind";
                 return RedirectToPage("/Index");
             }
+            else if (Username == "markus" && Password == "987")
+            {
+                HttpContext.Session.SetString("UserRole", "User");
+                //TempData["Message"] = "Du er logget ind";
+                return RedirectToPage("/Index");
+            }
             //if (AuthHelper.IsAdmin(HttpContext))
             //{
             //    TempData["Message"] = "Du er allerede logget ind!";

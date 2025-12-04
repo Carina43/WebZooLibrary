@@ -19,14 +19,25 @@ namespace WebZooWeb.Pages.EventPages
         {
             _eventService = eventService;
             Events = _eventService.GetAll();
+           
         }
 
         public void OnGet()
         {
-            var now = DateTime.Now;
+            var now = DateOnly.FromDateTime(DateTime.Now);
             Year = now.Year;
             Month = now.Month;
             Today = now.Day;
+
+            List<Event> tempt = Events;
+
+            foreach (Event e in tempt)
+            {
+                if (e.Date < now)
+                {
+                    Events.Remove(e);
+                }
+            }
         }
     }
 }

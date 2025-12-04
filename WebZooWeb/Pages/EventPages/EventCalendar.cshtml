@@ -1,5 +1,6 @@
 ﻿@page
 @model WebZooWeb.Pages.EventPages.EventCalendarModel
+@using WebZooWeb.Helpers
 @{
 }
 <body>
@@ -180,10 +181,14 @@
                     <img id="eventImg" class="img-fluid rounded shadow" />
                 </div> *@
 
-				<form method="post" asp-page-handler="SignUp">
+				@if (AuthHelper.IsAdmin(HttpContext) || AuthHelper.IsUser(HttpContext))
+				{
+					<form method="post" asp-page-handler="SignUp">
 					<input type="hidden" name="EventID" id="eventId" />
 					<button type="submit">Tilmeld dig dette event</button>
-				</form>
+					</form>
+				}
+				
 
 			</div>
 
