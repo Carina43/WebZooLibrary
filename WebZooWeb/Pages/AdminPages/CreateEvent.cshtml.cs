@@ -24,7 +24,7 @@ namespace WebZooWeb.Pages.AdminPages
         [BindProperty]
         public string Description { get; set; } 
         [BindProperty]
-        public string ImgPath { get; set; } = "";
+        public string ImgPath { get; set; } = "nope";
 
         public CreateEventModel(EventService eventService)
         {
