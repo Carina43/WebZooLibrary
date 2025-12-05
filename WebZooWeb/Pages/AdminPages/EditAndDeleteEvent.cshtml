@@ -78,4 +78,11 @@
 			document.getElementById('eventImgPath').value = button.getAttribute('data-imgPath');
 		});
 	</script>
+	<script>
+		// Show popup if TempData["Message"] exists
+		const message = '@TempData["Message"]';
+		if (message) {
+			alert(message); // You can replace this with a nicer modal
+		}
+	</script>
 }

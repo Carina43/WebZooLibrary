@@ -52,18 +52,19 @@ namespace WebZooWeb.Pages.AdminPages
         {
             if (Date < DateOnly.FromDateTime(DateTime.Now))
             {
-                return Page();
+                TempData["Message"] = "Du kan ikke oprette events tidligere end i dag";
+                return RedirectToPage("/AdminPages/EditAndDeleteEvent");
             }
 
             Debug.WriteLine($"PostEdit: {EditID}");
             _eventService.Edit(new Event(EditID, Name, Date, StartHour, EndHour, MaxAttendents, CurrentAttendents, Description, ImgPath));
-            return RedirectToPage("/EventPages/EventOverview");
+            return RedirectToPage("/AdminPages/EditAndDeleteEvent");
         }
 
         public IActionResult OnPostRemove()
         {
             _eventService.Remove(EditID);
-            return RedirectToPage("/EventPages/EventOverview");
+            return RedirectToPage("/AdminPages/EditAndDeleteEvent");
         }
 
         //public IActionResult OnPost(int editID)
