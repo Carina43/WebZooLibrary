@@ -39,26 +39,30 @@
 							}
 							else
 							{
-								var e = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay && e.Date.Month == Model.Month);
-								if (e != null)
+								var eventsToday = Model.Events.Where(e => e.Date.Day == currentDay && e.Date.Month == Model.Month && e.Date.Year == Model.Year);
+								if (eventsToday.Count() > 0)
 								{
 									System.Diagnostics.Debug.WriteLine($"EventToday!!!");
+
 									<td class="bg-danger text-white fw-bold">
 										@currentDay <br />
-										<button type="button" class="btn"
-												data-bs-toggle="modal"
-												data-bs-target="#editModal"
-												data-id="@e.Id"
-												data-name="@e.Name"
-												data-date="@e.Date.ToString("dd-MM-yyyy")"
-												data-startHour="@e.StartHour"
-												data-endHour="@e.EndHour"
-												data-maxAtt="@e.MaxAttendents"
-												data-curAtt="@e.CurrentAttendents"
-												data-description="@e.Description"
-												data-imgPath="@e.ImgPath">
+										@foreach (var e in eventsToday)
+										{
+											<button type="button" class="btn"
+													data-bs-toggle="modal"
+													data-bs-target="#editModal"
+													data-id="@e.Id"
+													data-name="@e.Name"
+													data-date="@e.Date.ToString("dd-MM-yyyy")"
+													data-startHour="@e.StartHour"
+													data-endHour="@e.EndHour"
+													data-maxAtt="@e.MaxAttendents"
+													data-curAtt="@e.CurrentAttendents"
+													data-description="@e.Description"
+													data-imgPath="@e.ImgPath">
 												@e.Name
-										</button>
+											</button>
+										}
 									</td>
 
 								}
@@ -113,12 +117,14 @@
 							}
 							else
 							{
-								var e = Model.Events.FirstOrDefault(e => e.Date.Day == currentDay2 && e.Date.Month == Model.NextMonth);
-								if (e != null)
+								var eventsToday = Model.Events.Where(e => e.Date.Day == currentDay2 && e.Date.Month == Model.NextMonth && e.Date.Year == Model.NextYear);
+								if (eventsToday.Count() > 0)
 								{
 									System.Diagnostics.Debug.WriteLine($"EventToday!!!");
 									<td class="bg-danger text-white fw-bold">
 										@currentDay2 <br />
+										@foreach(var e in eventsToday)
+										{
 										<button type="button" class="btn"
 												data-bs-toggle="modal"
 												data-bs-target="#editModal"
@@ -133,6 +139,7 @@
 												data-imgPath="@e.ImgPath">
 											@e.Name
 										</button>
+										}
 									</td>
 
 								}
@@ -184,11 +191,11 @@
 				@if (AuthHelper.IsAdmin(HttpContext) || AuthHelper.IsUser(HttpContext))
 				{
 					<form method="post" asp-page-handler="SignUp">
-					<input type="hidden" name="EventID" id="eventId" />
-					<button type="submit">Tilmeld dig dette event</button>
+						<input type="hidden" name="EventID" id="eventId" />
+						<button type="submit">Tilmeld dig dette event</button>
 					</form>
 				}
-				
+
 
 			</div>
 
