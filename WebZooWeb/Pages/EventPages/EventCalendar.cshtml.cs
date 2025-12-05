@@ -68,7 +68,7 @@ namespace WebZooWeb.Pages.EventPages
 
         public IActionResult OnPostSignUp()
         {
-            if (AuthHelper.IsUser(HttpContext))
+            if (AuthHelper.IsUser(HttpContext) || AuthHelper.IsAdmin(HttpContext))
             {
                 Event ev = _eventService.Get(EventID);
 
