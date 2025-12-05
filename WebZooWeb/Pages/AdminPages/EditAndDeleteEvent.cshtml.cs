@@ -17,17 +17,17 @@ namespace WebZooWeb.Pages.AdminPages
         [BindProperty]
         public DateOnly Date { get; set; }
         [BindProperty]
-        public TimeOnly StartHour { get; set; } = new TimeOnly(14, 0, 0);
+        public TimeOnly StartHour { get; set; }
         [BindProperty]
-        public TimeOnly EndHour { get; set; } = new TimeOnly(20, 0, 0);
+        public TimeOnly EndHour { get; set; }
         [BindProperty]
-        public int MaxAttendents { get; set; } = 50;
+        public int MaxAttendents { get; set; } 
         [BindProperty]
-        public int CurrentAttendents { get; set; } = 2;
+        public int CurrentAttendents { get; set; } 
         [BindProperty]
-        public string Description { get; set; } = "";
+        public string Description { get; set; }
         [BindProperty]
-        public string ImgPath { get; set; } = "";
+        public string ImgPath { get; set; } = "nope";
 
         private readonly EventService _eventService = new EventService();
 
@@ -52,18 +52,22 @@ namespace WebZooWeb.Pages.AdminPages
         {
             if (Date < DateOnly.FromDateTime(DateTime.Now))
             {
-                return Page();
+                TempData["Message"] = "Du kan ikke oprette events tidligere end i dag";
+                return RedirectToPage("/AdminPages/EditAndDeleteEvent");
             }
-
-            Debug.WriteLine($"PostEdit: {EditID}");
+            else if(ImgPath == null)
+            {
+                ImgPath = "nope";
+            }
+                Debug.WriteLine($"PostEdit: {EditID}");
             _eventService.Edit(new Event(EditID, Name, Date, StartHour, EndHour, MaxAttendents, CurrentAttendents, Description, ImgPath));
-            return RedirectToPage("/EventPages/EventOverview");
+            return RedirectToPage("/AdminPages/EditAndDeleteEvent");
         }
 
         public IActionResult OnPostRemove()
         {
             _eventService.Remove(EditID);
-            return RedirectToPage("/EventPages/EventOverview");
+            return RedirectToPage("/AdminPages/EditAndDeleteEvent");
         }
 
         //public IActionResult OnPost(int editID)

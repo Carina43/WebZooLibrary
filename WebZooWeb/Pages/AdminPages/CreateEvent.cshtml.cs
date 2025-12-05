@@ -24,7 +24,7 @@ namespace WebZooWeb.Pages.AdminPages
         [BindProperty]
         public string Description { get; set; } 
         [BindProperty]
-        public string ImgPath { get; set; } = "";
+        public string ImgPath { get; set; } = "nope";
 
         public CreateEventModel(EventService eventService)
         {
@@ -46,6 +46,8 @@ namespace WebZooWeb.Pages.AdminPages
         {
             if (Date < DateOnly.FromDateTime(DateTime.Now))
             {
+                
+                TempData["Message"] = "Du kan ikke oprette events tidligere end i dag";
                 return Page();
             }
 

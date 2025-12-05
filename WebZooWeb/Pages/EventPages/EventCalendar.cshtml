@@ -217,8 +217,8 @@
 			document.getElementById('eventDate').textContent = button.getAttribute('data-date');
 			document.getElementById('eventStartHour').textContent = button.getAttribute('data-startHour');
 			document.getElementById('eventEndHour').textContent = button.getAttribute('data-endHour');
-			document.getElementById('eventMaxAtt').textContent = button.getAttribute('data-maxAtt');
 			document.getElementById('eventCurAtt').textContent = button.getAttribute('data-curAtt');
+			document.getElementById('eventMaxAtt').textContent = button.getAttribute('data-maxAtt');
 			document.getElementById('eventDescription').textContent = button.getAttribute('data-description');
 
 			// document.getElementById('eventImg').src = button.getAttribute('data-imgPath');
@@ -226,5 +226,12 @@
 			document.getElementById('eventId').value = button.getAttribute('data-id');
 
 		});
+	</script>
+	<script>
+		const message = '@TempData["Message"]';
+		if (message)
+		{
+			alert(message);
+		}
 	</script>
 }

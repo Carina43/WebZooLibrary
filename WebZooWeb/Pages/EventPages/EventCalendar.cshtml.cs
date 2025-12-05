@@ -76,6 +76,7 @@ namespace WebZooWeb.Pages.EventPages
                 {
                     ev.CurrentAttendents++;
                     _eventService.Edit(ev);
+                    TempData["Message"] = "Du er nu tilmeldt!";
                 }
                 //for (int i = ev.CurrentAttendents; i < (ev.MaxAttendents); i++)
                 //{
@@ -83,7 +84,10 @@ namespace WebZooWeb.Pages.EventPages
                 //    _eventService.Edit(ev);
                 //}
                 //Debug.WriteLine($"EVentID: {EventID}");
-
+                else
+                {
+                    TempData["Message"] = "Ikke tilmeldt, da kapacitet er fuld";
+                }
               
 
             }

@@ -20,6 +20,7 @@
 						data-date="@e.Date.ToString("yyyy-MM-dd")"
 						data-startHour="@e.StartHour"
 						data-endHour="@e.EndHour"
+						data-curAtt="@e.CurrentAttendents"
 						data-maxAtt="@e.MaxAttendents"
 						data-description="@e.Description"
 						data-imgPath="@e.ImgPath">
@@ -53,6 +54,9 @@
 							<label for="eventMaxAtt">Max Tilmeldinger </label>
 							<input asp-for="MaxAttendents" id="eventMaxAtt" />
 							<input asp-for="Description" id="eventDescription" />
+							<input type="hidden" asp-for="ImgPath" id="eventImgPath" />
+							<input type="hidden" asp-for="CurrentAttendents" id="eventCurAtt" />
+
 						</div>
 						<button type="submit" asp-page-handler="Remove" class="btn btn-danger mt-5">Remove</button>
 						<button type="submit" class="btn btn-primary mt-5">Submit</button>
@@ -73,9 +77,17 @@
 			document.getElementById('eventDate').value = button.getAttribute('data-date');
 			document.getElementById('eventStartHour').value = button.getAttribute('data-startHour');
 			document.getElementById('eventEndHour').value = button.getAttribute('data-endHour');
+			document.getElementById('eventCurAtt').value = button.getAttribute('data-curAtt');
 			document.getElementById('eventMaxAtt').value = button.getAttribute('data-maxAtt');
 			document.getElementById('eventDescription').value = button.getAttribute('data-description');
 			document.getElementById('eventImgPath').value = button.getAttribute('data-imgPath');
 		});
+	</script>
+	<script>
+		// Show popup if TempData["Message"] exists
+		const message = '@TempData["Message"]';
+		if (message) {
+			alert(message); // You can replace this with a nicer modal
+		}
 	</script>
 }
