@@ -46,6 +46,8 @@ namespace WebZooWeb.Pages.AdminPages
         {
             if (Date < DateOnly.FromDateTime(DateTime.Now))
             {
+                
+                TempData["Message"] = "Du kan ikke oprette events tidligere end i dag";
                 return Page();
             }
 
