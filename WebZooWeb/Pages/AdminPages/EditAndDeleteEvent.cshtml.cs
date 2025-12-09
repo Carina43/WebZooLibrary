@@ -27,7 +27,7 @@ namespace WebZooWeb.Pages.AdminPages
         [BindProperty]
         public string Description { get; set; }
         [BindProperty]
-        public string ImgPath { get; set; } = "nope";
+        public string ImgPath { get; set; } = "/images/flamingopartyone.jpg";
 
         private readonly EventService _eventService = new EventService();
 
@@ -52,21 +52,25 @@ namespace WebZooWeb.Pages.AdminPages
         {
             if (Date < DateOnly.FromDateTime(DateTime.Now))
             {
-                TempData["Message"] = "Du kan ikke oprette events tidligere end i dag";
+                TempData["Message"] = "Du kan ikke redigere events til tidligere end i dag";
                 return RedirectToPage("/AdminPages/EditAndDeleteEvent");
             }
+            // Temp! nye events har ikke brug for denne
             else if(ImgPath == null)
             {
-                ImgPath = "nope";
+                ImgPath = "/images/flamingopartyone.jpg";
             }
                 Debug.WriteLine($"PostEdit: {EditID}");
             _eventService.Edit(new Event(EditID, Name, Date, StartHour, EndHour, MaxAttendents, CurrentAttendents, Description, ImgPath));
+            TempData["Message"] = "Event Redigeret";
             return RedirectToPage("/AdminPages/EditAndDeleteEvent");
         }
 
         public IActionResult OnPostRemove()
         {
             _eventService.Remove(EditID);
+            TempData["Message"] = "Event Slettet!";
+
             return RedirectToPage("/AdminPages/EditAndDeleteEvent");
         }
 
