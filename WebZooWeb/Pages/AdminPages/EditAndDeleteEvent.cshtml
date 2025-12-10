@@ -57,15 +57,16 @@
 			<div class="card-body border rounded border-dark shadow-1 mb-3 h-100" style="max-width: 18rem;">
 			<h4 class="card-title">@e.Name</h4>
 			<p class="card-text">
-				Dato: @e.Date<br />Starttidspunkt: @e.StartHour<br />Sluttidspunkt: @e.EndHour<br />
+				<i>@e.Date kl: @e.StartHour - @e.EndHour</i>
 				Pladsbegrænsing: @e.MaxAttendents<br />Tilmeldte: @e.CurrentAttendents<br />
 				Beskrivelse: @e.Description
+				<br />
 				<br />
 				<button type="button" class="btn btn-primary"
 						data-bs-toggle="modal"
 						data-bs-target="#editModal"
 						data-id="@e.Id"
-						data-name="@e.Name"
+						data-name="@e.Name"	
 						data-date="@e.Date.ToString("yyyy-MM-dd")"
 						data-startHour="@e.StartHour"
 						data-endHour="@e.EndHour"
