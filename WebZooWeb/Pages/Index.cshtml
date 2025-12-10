@@ -49,34 +49,40 @@
                 <h2>🦩🦩🦩 Velkommen til Zealand Zoo 🦩🦩🦩</h2>
                 <p>🦩 Åbent hver fredag fra klokken 14.00 til 20.00 🦩</p>
                 <p>
-                    Fredagsbar er ikke bare en fredag aften med øl og musik, det er et fænomen, en livsstil, en næsten spirituel oplevelse pakket ind i plastickrus og dåsesodavand 😎 Vi er den gruppe, der har sat sig for at gøre hver fredag til noget, man taler om i generationer, selvom hukommelsen dagen efter måske er lidt diffus 😅
+                    Fredagsbar er ikke bare en fredag aften med øl og musik, det er et fænomen, en livsstil, en næsten spirituel oplevelse pakket ind i plastickrus og dåsesodavand 😎
+                    <br />Vi er den gruppe, der har sat sig for at gøre hver fredag til noget, man taler om i generationer, selvom hukommelsen dagen efter måske er lidt diffus 😅
 
-                    Når vi åbner dørene, smelter stressen fra ugen som isterninger i et glas gin, og alle regler for almindelig, kedelig voksenadfærd smides ud ad vinduet – og ja, vi elsker det næsten lige så meget, som I vil! 🎉
-                    Musikken er altid på kanten af genial og absurd, drinksene flyder som vand i floden, og latteren er næsten obligatorisk, for vi kan simpelthen ikke garantere sikkerheden for dem, der prøver at holde sig alvorlige 😜
+                    <br />Når vi åbner dørene, smelter stressen fra ugen som isterninger i et glas gin, og alle regler for almindelig, kedelig voksenadfærd smides ud ad vinduet – og ja, vi elsker det næsten lige så meget, som I vil! 🎉
+                    <br />Musikken er altid på kanten af genial og absurd, drinksene flyder som vand i floden, og latteren er næsten obligatorisk, for vi kan simpelthen ikke garantere sikkerheden for dem, der prøver at holde sig alvorlige 😜
 
-                    Vi har lært, at de bedste minder opstår, når man kombinerer alt for høje forventninger med minimal planlægning, og det er netop vores speciale. At gå til fredagsbar med os er lidt som at hoppe ind i en parallel dimension, hvor alle er venner, selv dem man aldrig har talt med før, og hvor enhver pinlig dans faktisk bliver til en triumf 💃🕺
+                   <br/> Vi har lært, at de bedste minder opstår, når man kombinerer alt for høje forventninger med minimal planlægning, og det er netop vores speciale. At gå til fredagsbar med os er lidt som at hoppe ind i en parallel dimension, hvor alle er venner, selv dem man aldrig har talt med før, og hvor enhver pinlig dans faktisk bliver til en triumf 💃🕺
 
-                    Vi lover ikke bare en aften – vi lover en oplevelse, der får dig til at sige: “Hvordan kan alle andre fredage nogensinde måle sig med dette?” Vi er måske selv lidt for begejstrede og overdrevne, men det er kun fordi vi har set, hvordan små, glade øjeblikke vokser til legender, og vi vil dele det med jer alle 🥳
+                    <br/>Vi lover ikke bare en aften – vi lover en oplevelse, der får dig til at sige: “Hvordan kan alle andre fredage nogensinde måle sig med dette?” Vi er måske selv lidt for begejstrede og overdrevne, men det er kun fordi vi har set, hvordan små, glade øjeblikke vokser til legender, og vi vil dele det med jer alle 🥳
 
-                    Hver fredag er vores måde at hylde livet, studietiden og den evige jagt på gode historier, som man kan genfortælle i kantinen uden at nogen ruller med øjnene 😏 Kom og vær med, eller hold dig væk – vi vil ikke tvinge nogen, men vi kan garantere, at de, der bliver, aldrig glemmer det! ✨
+                    <br />Hver fredag er vores måde at hylde livet, studietiden og den evige jagt på gode historier, som man kan genfortælle i kantinen uden at nogen ruller med øjnene 😏 Kom og vær med, eller hold dig væk – vi vil ikke tvinge nogen, men vi kan garantere, at de, der bliver, aldrig glemmer det! ✨
                 </p>
 
 
             </div>
+
+
+            @* <div class="text-center"> *@
             <div class="col-sm-4">
                 <h4>🦩🦩 Kommende events 🦩🦩</h4>
                 @foreach (var e in Model.Upcoming)
                 {
-                    <div class="card-body">
+                    @* <div class="card-body"> *@
+                    <div class="card-body border rounded border-dark shadow-1 mb-3 h-100" style="max-width: 18rem;">
                         <h4 class="card-title">@e.Name</h4>
                         <p class="card-text">
                             Dato: @e.Date<br />Starttidspunkt: @e.StartHour<br />Sluttidspunkt: @e.EndHour<br />
                             Pladsbegrænsing: @e.MaxAttendents<br />Tilmeldte: @e.CurrentAttendents<br />
                             Beskrivelse: @e.Description
-                            <br />
+                           
                         </p>
                     </div>
                 }
+            @* </div> *@
             </div>
         </div>
     </div>
