@@ -65,13 +65,32 @@
 
             </div>
 
+            <div class="col-sm-4 text-center">
+                <h4 class="mb-4">🦩🦩 Kommende events 🦩🦩</h4>
+                @foreach (var e in Model.Upcoming)
+                {
+                    <div class="card mb-3 mx-auto shadow-sm" style="max-width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">@e.Name</h5>
+                            <p class="card-text">
+                                Dato: @e.Date<br />
+                                Starttidspunkt: @e.StartHour<br />
+                                Sluttidspunkt: @e.EndHour<br />
+                                Pladsbegrænsning: @e.MaxAttendents<br />
+                                Tilmeldte: @e.CurrentAttendents<br />
+                                Beskrivelse: @e.Description
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
 
-            @* <div class="text-center"> *@
-            <div class="col-sm-4">
+            @* <div class="text-center">
+             <div class="col-sm-4">
                 <h4>🦩🦩 Kommende events 🦩🦩</h4>
                 @foreach (var e in Model.Upcoming)
                 {
-                    @* <div class="card-body"> *@
+                     <div class="card-body">
                     <div class="card-body border rounded border-dark shadow-1 mb-3 h-100" style="max-width: 18rem;">
                         <h4 class="card-title">@e.Name</h4>
                         <p class="card-text">
@@ -82,8 +101,8 @@
                         </p>
                     </div>
                 }
-            @* </div> *@
             </div>
+            </div> *@
         </div>
     </div>
 </body>
