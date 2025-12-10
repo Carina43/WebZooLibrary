@@ -75,6 +75,10 @@
                             {
                                 <img src="@e.ImgPath" class="img-fluid object-fit-contain border rounded" />
                             }
+                            @if (e.ImgPath == "" || e.ImgPath == "jhufgreg")
+                            {
+                                <img src="/images/flamingopartytwo.jpg" class="img-fluid object-fit-contain border rounded" />
+                            }
                             <h5 class="card-title">@e.Name</h5>
                             <p class="card-text">
                                 Dato: @e.Date<br />
