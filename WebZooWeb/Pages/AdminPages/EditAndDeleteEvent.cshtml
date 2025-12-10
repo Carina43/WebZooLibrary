@@ -2,9 +2,17 @@
 @model WebZooWeb.Pages.AdminPages.EditAndDeleteEventModel
 @{
 }
+@{
+	var today = DateOnly.FromDateTime(DateTime.Now);
+}
+<h1>Kommende Events:</h1>
+<br />
 <div class="row row-cols-3">
+
 	@foreach (var e in Model.Events)
 	{
+		if (e.Date >= today)
+		{
 		<div class="card-body">
 			<h4 class="card-title">@e.Name</h4>
 			<p class="card-text">
@@ -29,10 +37,45 @@
 
 			</p>
 		</div>
+		}
 	}
 </div>
 
+<br />
+<h1>Gamle Events:</h1>
+<br />
+<div class="row row-cols-3">
+	@foreach (var e in Model.Events)
+	{
+		if (e.Date < today)
+		{
+		<div class="card-body">
+			<h4 class="card-title">@e.Name</h4>
+			<p class="card-text">
+				Dato: @e.Date<br />Starttidspunkt: @e.StartHour<br />Sluttidspunkt: @e.EndHour<br />
+				Pladsbegrænsing: @e.MaxAttendents<br />Tilmeldte: @e.CurrentAttendents<br />
+				Beskrivelse: @e.Description
+				<br />
+				<button type="button" class="btn btn-primary"
+						data-bs-toggle="modal"
+						data-bs-target="#editModal"
+						data-id="@e.Id"
+						data-name="@e.Name"
+						data-date="@e.Date.ToString("yyyy-MM-dd")"
+						data-startHour="@e.StartHour"
+						data-endHour="@e.EndHour"
+						data-curAtt="@e.CurrentAttendents"
+						data-maxAtt="@e.MaxAttendents"
+						data-description="@e.Description"
+						data-imgPath="@e.ImgPath">
+					Edit
+				</button>
 
+			</p>
+		</div>
+		}
+	}
+</div>
 
 <div class="modal fade" id="editModal" aria-labelledby="editModalLabel" aria-hidden="true">
 	<div class="modal-dialog">

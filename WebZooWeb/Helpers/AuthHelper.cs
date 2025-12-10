@@ -9,5 +9,10 @@ namespace WebZooWeb.Helpers
 
         public static bool IsUser(HttpContext ctx)
             => ctx.Session.GetString("UserRole") == "User";
+
+        public static string GetUserID(HttpContext ctx)
+        {
+            return ctx.Session.GetString("UserID");
+        }
     }
 }
