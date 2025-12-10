@@ -27,6 +27,7 @@ namespace WebZooWeb.Pages
             else if (Username == "markus" && Password == "987")
             {
                 HttpContext.Session.SetString("UserRole", "User");
+                HttpContext.Session.SetString("UserID", Username);
                 //TempData["Message"] = "Du er logget ind";
                 return RedirectToPage("/Index");
             }
