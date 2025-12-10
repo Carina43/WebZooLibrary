@@ -30,9 +30,9 @@ namespace WebZooWeb.Pages.AdminPages
         public string ImgPath { get; set; } = "/images/flamingopartyone.jpg";
 
         private readonly EventService _eventService = new EventService();
-
         [BindProperty]
         public List<Event> Events { get; set; }
+
 
         public EditAndDeleteEventModel(EventService eventService)
         {
