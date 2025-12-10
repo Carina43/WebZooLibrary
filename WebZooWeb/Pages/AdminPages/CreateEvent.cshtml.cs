@@ -24,7 +24,7 @@ namespace WebZooWeb.Pages.AdminPages
         [BindProperty]
         public string Description { get; set; } 
         [BindProperty]
-        public string ImgPath { get; set; } = "nope";
+        public string ImgPath { get; set; } = "/images/flamingopartyone.jpg";
 
         public CreateEventModel(EventService eventService)
         {
@@ -54,6 +54,7 @@ namespace WebZooWeb.Pages.AdminPages
             if(Name == null) { Name = "Fredagsbar"; }
             if(Description == null) { Description = "info kommer senere.."; }
             _eventService.Add(Name, Date, StartHour, EndHour, MaxAttendents, CurrentAttendents, Description, ImgPath);
+            TempData["Message"] = "Event Oprettet!";
             return RedirectToPage ("/AdminPages/CreateEvent");
         }
     }

@@ -70,6 +70,9 @@ namespace WebZooWeb.Pages.EventPages
         {
             if (AuthHelper.IsUser(HttpContext) || AuthHelper.IsAdmin(HttpContext))
             {
+                string username = AuthHelper.GetUserID(HttpContext);
+                Debug.WriteLine($"username?? {username}");
+
                 Event ev = _eventService.Get(EventID);
 
                 if (ev.CurrentAttendents < ev.MaxAttendents)
