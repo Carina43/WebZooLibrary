@@ -2,103 +2,122 @@
 @using WebZooWeb.Helpers
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - WebZooWeb</title>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/WebZooWeb.styles.css" asp-append-version="true" />
-	
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+        .navbar .nav-link,
+        .navbar .nav-link:visited,
+        .navbar .nav-link:active,
+        .navbar .nav-link.text-dark,
+        .navbar .btn.btn-link.nav-link {
+            color: #ff42d4 !important;
+        }
+
+            .navbar .nav-link:hover,
+            .navbar .nav-link:focus,
+            .navbar .nav-link.text-dark:hover,
+            .navbar .btn.btn-link.nav-link:hover,
+            .navbar .btn.btn-link.nav-link:focus {
+                color: #ff7ae6 !important;
+            }
+    </style>
+    <title>@ViewData["Title"] - WebZooWeb</title>
+
+
+
+    <!-- Bootstrap and site CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebZooWeb.styles.css" asp-append-version="true" />
+
+
 </head>
 
-	<body style="background-color: pink;">
-	<header>
-		<nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3">
-			<div class="container">
-				<a class="navbar-brand" asp-area="" asp-page="/Index">WebZooWeb</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-					<ul class="navbar-nav flex-grow-1">
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-page="/EventPages/EventCalendar">Event Oversigt</a>
-						</li>
-						@if (AuthHelper.IsAdmin(Context))
-						{
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-page="/AdminPages/CreateEvent">Opret Event</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-page="/AdminPages/EditAndDeleteEvent">Rediger Event</a>
-							</li>
+<body style="background-color: #fff; color: #000">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">WebZooWeb</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/EventPages/EventCalendar">Event Oversigt</a>
+                        </li>
 
-							<ul class="navbar-nav ms-auto">
-							<li class="nav-item">
-								
-								<form method="post" asp-page="/Login" asp-page-handler="Logout">
-									<button type="submit" class="nav-link btn btn-link text-dark" >
-										Log ud!
-									</button>
-								</form>
-							</li>
-							</ul>
+                        @if (AuthHelper.IsAdmin(Context))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AdminPages/CreateEvent">Opret Event</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AdminPages/EditAndDeleteEvent">Rediger Event</a>
+                            </li>
 
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <form method="post" asp-page="/Login" asp-page-handler="Logout">
+                                        <button type="submit" class="nav-link btn btn-link text-dark">
+                                            Log ud!
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        }
 
-						}
-						@if (AuthHelper.IsUser(Context))
-						{
-							<ul class="navbar-nav ms-auto">
-								<li class="nav-item">
+                        @if (AuthHelper.IsUser(Context))
+                        {
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <form method="post" asp-page="/Login" asp-page-handler="Logout">
+                                        <button type="submit" class="nav-link btn btn-link text-dark">
+                                            Log ud!
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        }
 
-									<form method="post" asp-page="/Login" asp-page-handler="Logout">
-										<button type="submit" class="nav-link btn btn-link text-dark">
-											Log ud!
-										</button>
-									</form>
-								</li>
-							</ul>
+                        @if (!AuthHelper.IsAdmin(Context) && !AuthHelper.IsUser(Context))
+                        {
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Login">Log Ind</a>
+                                </li>
+                            </ul>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
-						}
-
-
-						@if (!AuthHelper.IsAdmin(Context) && !AuthHelper.IsUser(Context))
-						{
-							<ul class="navbar-nav ms-auto">
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-page="/Login">Log Ind</a>
-							</li>
-							</ul>
-						}
-						
-
-
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
-	<div class="container">
-		<main role="main" class="pb-3">
-			@RenderBody()
-		</main>
-	</div>
-	@* 
+    @* Optional footer *@
+    @*
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2025 - WebZooWeb - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
-    </footer> *@
+    </footer>
+    *@
 
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
-	@await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
