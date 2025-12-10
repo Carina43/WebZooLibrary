@@ -1,22 +1,59 @@
+/* -----------------------------
+   Base styles
+----------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+/* -----------------------------
+   Focus / active states
+----------------------------- */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* -----------------------------
+   Navbar Pink Theme
+   Prevents FOUC (flash of blue)
+----------------------------- */
+.navbar-pink {
+    background-color: #290055 !important; /* dark purple/pink background */
+}
+
+    .navbar-pink .nav-link,
+    .navbar-pink .nav-link:visited,
+    .navbar-pink .nav-link:active,
+    .navbar-pink .nav-link.text-dark,
+    .navbar-pink .btn.btn-link.nav-link {
+        color: #ff42d4 !important; /* main pink color */
+    }
+
+        .navbar-pink .nav-link:hover,
+        .navbar-pink .nav-link:focus,
+        .navbar-pink .nav-link.text-dark:hover,
+        .navbar-pink .btn.btn-link.nav-link:hover,
+        .navbar-pink .btn.btn-link.nav-link:focus {
+            color: #ff7ae6 !important; /* hover pink */
+            text-decoration: none !important;
+        }
+
+/* Optional: enforce visited links pink globally (if desired) */
+a:visited {
+    color: #ff42d4 !important;
 }

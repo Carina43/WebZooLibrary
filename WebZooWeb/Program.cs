@@ -10,6 +10,7 @@ namespace WebZooWeb
 
             // Adding EventServices from WebZooLibawy
             builder.Services.AddSingleton<EventService>();
+            builder.Services.AddSingleton<UserService>();
             // Add services to the container.
             builder.Services.AddRazorPages();
             // Add Services for sessions

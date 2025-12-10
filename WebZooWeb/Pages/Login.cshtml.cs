@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WebZooLibrary.Service;
 using WebZooWeb.Helpers;
 
 namespace WebZooWeb.Pages
 {
     public class LoginModel : PageModel
     {
+        private readonly UserService _userService = new UserService();
+
         [BindProperty]
         public string Username { get; set; }
         [BindProperty]
@@ -18,32 +21,25 @@ namespace WebZooWeb.Pages
         }
         public IActionResult OnPost()
         {
-            if (Username == "admin" && Password == "123")
+            foreach(var user in _userService.GetAllUsers())
             {
-                HttpContext.Session.SetString("UserRole", "Admin");
-                //TempData["Message"] = "Du er logget ind";
-                return RedirectToPage("/Index");
-            }
-            else if (Username == "markus" && Password == "987")
-            {
-                HttpContext.Session.SetString("UserRole", "User");
-                HttpContext.Session.SetString("UserID", Username);
-                //TempData["Message"] = "Du er logget ind";
-                return RedirectToPage("/Index");
-            }
-            //if (AuthHelper.IsAdmin(HttpContext))
-            //{
-            //    TempData["Message"] = "Du er allerede logget ind!";
-            //}
-            else
-            {
-                TempData["Message"] = "Ugyldigt log ind!";
-            }
+                if (Username == user.ID && Password == user.Password && user.IsAdmin)
+                {
+                    HttpContext.Session.SetString("UserRole", "Admin");
+                    HttpContext.Session.SetString("UserID", Username);
 
-            //ModelState.AddModelError("", "Invalid Login.");
+                    return RedirectToPage("/Index");
+                }
+                else if(Username == user.ID && Password == user.Password && !user.IsAdmin)
+                {
+                    HttpContext.Session.SetString("UserRole", "User");
+                    HttpContext.Session.SetString("UserID", Username);
+
+                    return RedirectToPage("/Index");
+                }
+            }
+            TempData["Message"] = "Ugyldigt log ind!";
             return Page();
-
-          
         }
 
         public IActionResult OnPostLogout()
