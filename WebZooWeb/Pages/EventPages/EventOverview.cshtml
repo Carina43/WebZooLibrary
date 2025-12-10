@@ -6,16 +6,19 @@
 <a class="nav-link btn-light" asp-page="/EventPages/EventCalendar"><h4 class="card-title">Kalender-visning</h4></a>
 
 
-<div class="row row-cols-3">
+<div class="row row-cols-md-2 row-cols-lg-4 g-3">
     @foreach (var e in Model.Events)
     {
-        <div class="card-body">
+            <div class="col mb-1">
+            <div class="card-body border rounded border-dark shadow-1 mb-3 h-100" style="max-width: 18rem;">
             <h4 class="card-title">@e.Name</h4>
-            <p class="card-text">Dato: @e.Date<br />Starttidspunkt: @e.StartHour<br />Sluttidspunkt: @e.EndHour<br />
+                <p class="card-text">
+                    <i>@e.Date kl: @e.StartHour - @e.EndHour</i><br />
                 Pladsbegrænsing: @e.MaxAttendents<br />Tilmeldte: @e.CurrentAttendents<br />
                 Beskrivelse: @e.Description
             </p>
-        </div>
+            </div>
+            </div>
     }
 </div>
 
