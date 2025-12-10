@@ -26,7 +26,7 @@
 				var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
 				int currentDay = 1;
 
-				System.Diagnostics.Debug.WriteLine($"DaysInMonth: {daysInMonth} ");
+				// System.Diagnostics.Debug.WriteLine($"DaysInMonth: {daysInMonth} ");
 
 				for (int week = 0; currentDay <= daysInMonth; week++)
 				{
@@ -102,14 +102,14 @@
 				var dayOfWeek2 = (int)firstDayOfNextMonth.DayOfWeek;
 				int currentDay2 = 1;
 
-				System.Diagnostics.Debug.WriteLine($"DaysInNextMonth: {daysInNextMonth} ");
+				// System.Diagnostics.Debug.WriteLine($"DaysInNextMonth: {daysInNextMonth} ");
 
 				for (int week = 0; currentDay2 <= daysInNextMonth; week++)
 				{
 					<tr>
 						@for (int day = 0; day < 7; day++)
 						{
-							System.Diagnostics.Debug.WriteLine($"Week: {week} Day in loop2: {day} ");
+							// System.Diagnostics.Debug.WriteLine($"Week: {week} Day in loop2: {day} ");
 
 							if (week == 0 && day < dayOfWeek2 || currentDay2 > daysInNextMonth)
 							{
@@ -120,7 +120,7 @@
 								var eventsToday = Model.Events.Where(e => e.Date.Day == currentDay2 && e.Date.Month == Model.NextMonth && e.Date.Year == Model.NextYear);
 								if (eventsToday.Count() > 0)
 								{
-									System.Diagnostics.Debug.WriteLine($"EventToday!!!");
+									// System.Diagnostics.Debug.WriteLine($"EventToday!!!");
 									<td class="bg-danger text-white fw-bold">
 										@currentDay2 <br />
 										@foreach(var e in eventsToday)

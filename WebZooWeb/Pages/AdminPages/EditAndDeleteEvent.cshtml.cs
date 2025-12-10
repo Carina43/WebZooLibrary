@@ -10,6 +10,8 @@ namespace WebZooWeb.Pages.AdminPages
 {
     public class EditAndDeleteEventModel : PageModel
     {
+        private readonly EventService _eventService = new EventService();
+
         [BindProperty]
         public int EditID { set; get; }
         [BindProperty]
@@ -28,8 +30,6 @@ namespace WebZooWeb.Pages.AdminPages
         public string Description { get; set; }
         [BindProperty]
         public string ImgPath { get; set; } = "/images/flamingopartyone.jpg";
-
-        private readonly EventService _eventService = new EventService();
         [BindProperty]
         public List<Event> Events { get; set; }
 

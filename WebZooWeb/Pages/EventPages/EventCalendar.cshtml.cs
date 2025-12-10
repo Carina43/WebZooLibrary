@@ -10,6 +10,7 @@ namespace WebZooWeb.Pages.EventPages
     public class EventCalendarModel : PageModel
     {
         private readonly EventService _eventService = new EventService();
+        private readonly UserService _userService = new UserService();
 
         [BindProperty]
         public List<Event> Events { get; set; } = new List<Event>();
@@ -41,7 +42,7 @@ namespace WebZooWeb.Pages.EventPages
             //Events = _eventService.GetAll();
             foreach (Event e in Events)
             {
-                Debug.WriteLine($"Events: {e.Name}");
+                //Debug.WriteLine($"Events: {e.Name}");
             }
         }
 
@@ -68,33 +69,35 @@ namespace WebZooWeb.Pages.EventPages
 
         public IActionResult OnPostSignUp()
         {
-            if (AuthHelper.IsUser(HttpContext) || AuthHelper.IsAdmin(HttpContext))
+            string username = AuthHelper.GetUserID(HttpContext);
+
+            if (!AuthHelper.IsUser(HttpContext) && !AuthHelper.IsAdmin(HttpContext))
             {
-                string username = AuthHelper.GetUserID(HttpContext);
-                Debug.WriteLine($"username?? {username}");
-
-                Event ev = _eventService.Get(EventID);
-
-                if (ev.CurrentAttendents < ev.MaxAttendents)
-                {
-                    ev.CurrentAttendents++;
-                    _eventService.Edit(ev);
-                    TempData["Message"] = "Du er nu tilmeldt!";
-                }
-                //for (int i = ev.CurrentAttendents; i < (ev.MaxAttendents); i++)
-                //{
-                //    ev.CurrentAttendents++;
-                //    _eventService.Edit(ev);
-                //}
-                //Debug.WriteLine($"EVentID: {EventID}");
-                else
-                {
-                    TempData["Message"] = "Ikke tilmeldt, da kapacitet er fuld";
-                }
-              
-
+                TempData["Message"] = "Log ind for at tilmelde dig events";
+                return RedirectToPage("/Login");
             }
 
+            else if (!_userService.CheckAttendance(username, EventID))
+            {
+                TempData["Message"] = "Du er allerede tilmeldt dette event";
+                return RedirectToPage("/EventPages/EventCalendar");
+            }
+
+            else if (CurrentAttendents >= MaxAttendents)
+            {
+                TempData["Message"] = "Du blev ikke tilmeldt, da kapacitet er fuld";
+                return RedirectToPage("/EventPages/EventCalendar");
+            }
+
+            else
+            {
+                _userService.AttendEvent(username, EventID);
+                Event ev = _eventService.Get(EventID);
+                ev.CurrentAttendents++;
+                _eventService.Edit(ev);
+                TempData["Message"] = "Du er nu tilmeldt!";
+            }
+            
             return RedirectToPage("/EventPages/EventCalendar");
 
 
