@@ -11,12 +11,17 @@
     {
             <div class="col mb-1">
             <div class="card-body border rounded border-dark shadow-1 mb-3 h-100" style="max-width: 18rem;">
+                @if (e.ImgPath != "")
+                {
+                    <img src="@e.ImgPath" class="img-fluid object-fit-contain border rounded"/>
+                }
             <h4 class="card-title">@e.Name</h4>
                 <p class="card-text">
                     <i>@e.Date kl: @e.StartHour - @e.EndHour</i><br />
                 Pladsbegrænsing: @e.MaxAttendents<br />Tilmeldte: @e.CurrentAttendents<br />
                 Beskrivelse: @e.Description
             </p>
+
             </div>
             </div>
     }
