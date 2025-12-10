@@ -19,9 +19,29 @@
                         <input type="time" asp-for="StartHour" id="StartTime" aria-describedby="dateTimeHelp" placeholder="Skriv Starttidspunkt" step="" />
                         <label for="inputDateTime">Sluttid: </label>
                         <input type="time" asp-for="EndHour" id="StartTime" aria-describedby="dateTimeHelp" placeholder="Skriv Sluttidspunkt" step="" />
-                        <label for="inputDateTime">Max Tilmeldinger </label>
+                        <br/>
+                        <label for="inputMaxAttendants">Max Tilmeldinger </label>
                         <input asp-for="MaxAttendents" id="MaxAttendents" placeholder="Max Tilmeldinger" />
                         <input asp-for="Description" id="Description" placeholder="Om Eventet:" />
+                        <input type="hidden" asp-for="ImgPath" />
+                        <div class="btn-group row row-cols-md-2 row-cols-lg-4 g-3 mt-3">
+                            <button type="button" onclick="setImagePath('\\images\\flamingopartyone.jpg')">
+                                <img src="\images\flamingopartyone.jpg" class="img-fluid object-fit-contain border rounded" />
+                            </button>
+                            <button type="button" onclick="setImagePath('\\images\\flamingopartytwo.jpg')">
+                                <img src="\images\flamingopartytwo.jpg" class="img-fluid object-fit-contain border rounded" />
+                            </button>
+                            <button type="button" onclick="setImagePath('\\images\\flamingocut5.jpg')">
+                                <img src="\images\flamingocut5.jpg" class="img-fluid object-fit-contain border rounded" />
+                            </button>
+                        </div>
+
+                        @* <div class="btn-group row row-cols-md-2 row-cols-lg-4 g-3 mt-3" role="group" aria-label="Image Selection">
+                            <button type="button" class="btn"> <img src="\images\flamingopartyone.jpg" class="img-fluid object-fit-contain border rounded" /> </button>
+                            <button type="button" class="btn"> <img src="\images\flamingopartytwo.jpg" class="img-fluid object-fit-contain border rounded" /> </button>
+                            <button type="button" class="btn"> <img src="\images\flamingocut5.jpg" class="img-fluid object-fit-contain border rounded"/> </button>
+                        </div> *@
+                        
                     </div>
                     <button type="submit" class="btn btn-primary mt-5">Submit</button>
                 </form>
@@ -38,5 +58,10 @@
     const message = '@TempData["Message"]';
     if (message) {
         alert(message); // You can replace this with a nicer modal
+    }
+</script>
+<script>
+    function setImagePath(path) {
+        document.querySelector('[name="ImgPath"]').value = path;
     }
 </script>
