@@ -11,23 +11,15 @@ namespace WebZooWeb.Pages.EventPages
 
         [BindProperty]
         public List<Event> Events { get; set; } = new List<Event>();
-        public int Year { get; set; }
-        public int Month { get; set; }
-        public int Today { get; set; }
 
         public EventOverviewModel(EventService eventService)
         {
-            _eventService = eventService;
-            //Events = _eventService.GetAll();
-           
+            _eventService = eventService;           
         }
 
         public void OnGet()
         {
             var now = DateOnly.FromDateTime(DateTime.Now);
-            Year = now.Year;
-            Month = now.Month;
-            Today = now.Day;
 
             List<Event> tempt = _eventService.GetAll();
 
