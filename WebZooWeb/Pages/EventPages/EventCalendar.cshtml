@@ -25,9 +25,6 @@
 				var firstDayOfMonth = new DateTime(Model.Year, Model.Month, 1);
 				var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
 				int currentDay = 1;
-
-				// System.Diagnostics.Debug.WriteLine($"DaysInMonth: {daysInMonth} ");
-
 				for (int week = 0; currentDay <= daysInMonth; week++)
 				{
 					<tr>
@@ -46,7 +43,7 @@
 
 									<td class="bg-danger text-white fw-bold">
 										@currentDay <br />
-										@foreach (var e in eventsToday)
+										@foreach (var e in eventsToday)	
 										{
 											<button type="button" class="btn"
 													data-bs-toggle="modal"
@@ -64,13 +61,11 @@
 											</button>
 										}
 									</td>
-
 								}
 								else
 								{
 									<td>@currentDay</td>
 								}
-								// var cssClass = eventToday != null ? "bg-danger text-white fw-bold" : "";
 								currentDay++;
 							}
 						}
@@ -102,14 +97,12 @@
 				var dayOfWeek2 = (int)firstDayOfNextMonth.DayOfWeek;
 				int currentDay2 = 1;
 
-				// System.Diagnostics.Debug.WriteLine($"DaysInNextMonth: {daysInNextMonth} ");
 
 				for (int week = 0; currentDay2 <= daysInNextMonth; week++)
 				{
 					<tr>
 						@for (int day = 0; day < 7; day++)
 						{
-							// System.Diagnostics.Debug.WriteLine($"Week: {week} Day in loop2: {day} ");
 
 							if (week == 0 && day < dayOfWeek2 || currentDay2 > daysInNextMonth)
 							{
@@ -120,7 +113,6 @@
 								var eventsToday = Model.Events.Where(e => e.Date.Day == currentDay2 && e.Date.Month == Model.NextMonth && e.Date.Year == Model.NextYear);
 								if (eventsToday.Count() > 0)
 								{
-									// System.Diagnostics.Debug.WriteLine($"EventToday!!!");
 									<td class="bg-danger text-white fw-bold">
 										@currentDay2 <br />
 										@foreach(var e in eventsToday)
@@ -182,11 +174,6 @@
 
 				<div id="eventDescription" class="border-top rounded p-2"></div>
 
-				@* <hr />
-
-                <div class="text-center">
-                    <img id="eventImg" class="img-fluid rounded shadow" />
-                </div> *@
 
 				@if (AuthHelper.IsAdmin(HttpContext) || AuthHelper.IsUser(HttpContext))
 				{
@@ -195,8 +182,6 @@
 						<button type="submit">Tilmeld dig dette event</button>
 					</form>
 				}
-
-
 			</div>
 
 
@@ -220,8 +205,6 @@
 			document.getElementById('eventCurAtt').textContent = button.getAttribute('data-curAtt');
 			document.getElementById('eventMaxAtt').textContent = button.getAttribute('data-maxAtt');
 			document.getElementById('eventDescription').textContent = button.getAttribute('data-description');
-
-			// document.getElementById('eventImg').src = button.getAttribute('data-imgPath');
 
 			document.getElementById('eventId').value = button.getAttribute('data-id');
 

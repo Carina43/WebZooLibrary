@@ -55,7 +55,6 @@ namespace WebZooWeb.Pages.AdminPages
                 TempData["Message"] = "Du kan ikke redigere events til tidligere end i dag";
                 return RedirectToPage("/AdminPages/EditAndDeleteEvent");
             }
-            // Temp! nye events har ikke brug for denne
             else if(ImgPath == null)
             {
                 ImgPath = "/images/flamingopartyone.jpg";
@@ -73,11 +72,5 @@ namespace WebZooWeb.Pages.AdminPages
 
             return RedirectToPage("/AdminPages/EditAndDeleteEvent");
         }
-
-        //public IActionResult OnPost(int editID)
-        //{
-        //    _eventService.Edit();
-        //    return RedirectToPage("/EventPages/EventOverview");
-        //}
     }
 }
