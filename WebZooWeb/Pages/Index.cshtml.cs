@@ -7,9 +7,7 @@ namespace WebZooWeb.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
         private readonly EventService _eventService = new EventService();
-
 
         [BindProperty]
         public DateOnly Today { get; set; }
@@ -18,9 +16,8 @@ namespace WebZooWeb.Pages
         [BindProperty]
         public List<Event> Upcoming { get; set; } = new List<Event>();
 
-        public IndexModel(ILogger<IndexModel> logger, EventService eventService)
+        public IndexModel(EventService eventService)
         {
-            _logger = logger;
             _eventService = eventService;
             Events = _eventService.GetAll();
         }
