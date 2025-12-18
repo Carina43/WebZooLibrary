@@ -14,7 +14,6 @@ namespace WebZooWeb.Pages
         [BindProperty]
         public string Password { get; set; }
 
-
         public void OnGet()
         {
 
@@ -47,7 +46,5 @@ namespace WebZooWeb.Pages
             HttpContext.Session.Clear();
             return RedirectToPage("/Index");
         }
-
-       
     }
 }

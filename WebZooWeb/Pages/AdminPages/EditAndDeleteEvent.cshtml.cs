@@ -59,7 +59,7 @@ namespace WebZooWeb.Pages.AdminPages
             {
                 ImgPath = "/images/flamingopartyone.jpg";
             }
-                Debug.WriteLine($"PostEdit: {EditID}");
+            Debug.WriteLine($"PostEdit: {EditID}");
             _eventService.Edit(new Event(EditID, Name, Date, StartHour, EndHour, MaxAttendents, CurrentAttendents, Description, ImgPath));
             TempData["Message"] = "Event Redigeret";
             return RedirectToPage("/AdminPages/EditAndDeleteEvent");

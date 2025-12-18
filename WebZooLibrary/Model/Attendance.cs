@@ -13,10 +13,10 @@ namespace WebZooLibrary.Model
         public int EventID { get; set; }
 
         public Attendance(int id, string attendee, int eventID)
-            {
+        {
             ID = id;
             Attendee = attendee;
-            EventID = eventID; 
-            }
+            EventID = eventID;
+        }
     }
 }

@@ -40,10 +40,10 @@ namespace WebZooWeb.Pages.EventPages
         {
             _eventService = eventService;
             //Events = _eventService.GetAll();
-            foreach (Event e in Events)
-            {
-                //Debug.WriteLine($"Events: {e.Name}");
-            }
+            //foreach (Event e in Events)
+            //{
+            //    Debug.WriteLine($"Events: {e.Name}");
+            //}
         }
 
         public void OnGet()
@@ -99,9 +99,6 @@ namespace WebZooWeb.Pages.EventPages
             }
             
             return RedirectToPage("/EventPages/EventCalendar");
-
-
-
         }
     }
 }

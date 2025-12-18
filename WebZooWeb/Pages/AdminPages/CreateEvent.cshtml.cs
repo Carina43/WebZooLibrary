@@ -46,13 +46,13 @@ namespace WebZooWeb.Pages.AdminPages
         {
             if (Date < DateOnly.FromDateTime(DateTime.Now))
             {
-                
                 TempData["Message"] = "Du kan ikke oprette events tidligere end i dag";
                 return Page();
             }
 
             if(Name == null) { Name = "Fredagsbar"; }
             if(Description == null) { Description = "info kommer senere.."; }
+
             _eventService.Add(Name, Date, StartHour, EndHour, MaxAttendents, CurrentAttendents, Description, ImgPath);
             TempData["Message"] = "Event Oprettet!";
             return RedirectToPage ("/AdminPages/CreateEvent");
