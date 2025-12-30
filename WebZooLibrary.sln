@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebZooLibrary", "WebZooLibr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebZooWeb", "WebZooWeb\WebZooWeb.csproj", "{05BE7210-50C2-4C86-AFD0-9C3F346D5D41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebZooLibrary.Tests", "WebZooLibrary.Tests\WebZooLibrary.Tests.csproj", "{7A40EA2A-D89A-4D2F-B70C-AF2CF2FE8291}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{05BE7210-50C2-4C86-AFD0-9C3F346D5D41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05BE7210-50C2-4C86-AFD0-9C3F346D5D41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05BE7210-50C2-4C86-AFD0-9C3F346D5D41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A40EA2A-D89A-4D2F-B70C-AF2CF2FE8291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A40EA2A-D89A-4D2F-B70C-AF2CF2FE8291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A40EA2A-D89A-4D2F-B70C-AF2CF2FE8291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A40EA2A-D89A-4D2F-B70C-AF2CF2FE8291}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
