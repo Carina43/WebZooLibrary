@@ -81,9 +81,12 @@ namespace WebZooLibrary.Repository
             }
 
             // LINQ der sorterer events efter Date
-            var sortedEvents = events.OrderBy(e => e.Date);
+            //var sortedEvents = events.OrderBy(e => e.Date);
+            //return sortedEvents.ToList();
 
-            return sortedEvents.ToList();
+            // Sortering med IComparable
+            events.Sort();
+            return events;
         }
 
         public void Add(Event item) 

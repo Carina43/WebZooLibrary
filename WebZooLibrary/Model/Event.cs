@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebZooLibrary.Model
 {
-    public class Event
+    public class Event : IComparable<Event>
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -29,6 +29,19 @@ namespace WebZooLibrary.Model
             CurrentAttendents = currentattendents;
             Description = description;
             ImgPath = imgpath;
+        }
+
+        public int CompareTo(Event other)
+        {
+            if (other == null) return 1;
+
+            int dateComparison = Date.CompareTo(other.Date);
+            if (dateComparison != 0) return dateComparison;
+
+            int timeComparison = StartHour.CompareTo(other.StartHour);
+            if (timeComparison != 0) return timeComparison;
+
+            return Id.CompareTo(other.Id);
         }
     }
 }
