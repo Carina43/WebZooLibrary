@@ -11,11 +11,12 @@ namespace WebZooLibrary.Tests.Service
     [TestClass]
     public class EventServiceTests
     {
+        EventService eventService = new EventService();
+
         [TestMethod]
         public void GetAll_GetEventsFromDB_EventList()
         {
             // Arrange
-            EventService eventService = new EventService();
             List<Event> events = new List<Event>();
 
             // Act
@@ -23,6 +24,19 @@ namespace WebZooLibrary.Tests.Service
 
             // Assert
             Assert.IsTrue(events.Count() > 0);
+        }
+
+        [TestMethod]
+        public void Get_GetByID_ChosenEvent()
+        {
+            // Arrange 
+            Event expected = eventService.GetAll().First();
+
+            // Act 
+            Event actual = eventService.Get(expected.Id);
+
+            // Assert
+            Assert.AreEqual(expected.Id, actual.Id);
         }
     }
 }
